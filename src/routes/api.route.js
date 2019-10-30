@@ -3,6 +3,7 @@ const router = express.Router();
 const usuarioRouter = require("./api.usuario.route");
 const Usuario = require("../dataaccess/model/Usuario");
 const jwt = require("jsonwebtoken");
+const config = require("../../config");
 
 router.use("/Usuario", usuarioRouter);
 
