@@ -1,11 +1,13 @@
 let chai = require('chai');
 let chaiHttp = require('chai-http');
 let app = require('../src/app');
+
+let should = chai.should
 var mongoose = require('mongoose');
 
 chai.should();
 chai.use(chaiHttp);
-const url = 'http://localhost:7777';
+
 
 before(done => {
     console.log('\n\n-----------------------\n--\n-- START TEST\n--\n-------------------------');
@@ -18,19 +20,32 @@ after(done => {
 });
 
 /* asyn test */
-describe('#Asynchronous user crud test', () =>{
+ describe('#Asynchronous user crud test', () =>{
+    var usuarios = [{
+        username: "Alinemhdez",
+        password: "secret",
+        nombre: "aline",
+        apellidos: "Hdez Fajardo",
+        correo: "alinemhdez@gmail.com",
+        estado: "Hola",
+        estadoCuenta: "activo",
+        fotoPerfil: "foto"
+    }]
     it('agregar "usuario"', (done) => {
-        chai.request(app)
-        .post("/Usuario")
-        .send({username: "Alinemhdez", password: "secret", nombre: "aline", apellidos: "Hdez Fajardo", correo: "alinemhdez@gmail.com", estado: "Hola", estadoCuenta: "activo", fotoPerfil: "foto"})
-        .end( function(err,res){
-            console.log(res.body)
-            expect(res).to.have.status(200);
-            done();
-            
+        for(usuario in usuarios){
+            chai.request(app)
+            .post("/usuarios/")
+            .send(usuarios[usuario])
+            .end((err,res)=>{
+                res.should.have.status(200);
+                console.log("Response Body:", res.body);
+            })
+        }
+        done()
+        
         });
-    }).timeout(0);
-});
+
+})
 describe('#Insertar usuario con error', () =>{
     it('recibe un usuario con error', (done) => {
         chai.request(url)
@@ -38,7 +53,7 @@ describe('#Insertar usuario con error', () =>{
         .send({username: "Charlyssde", password: "secret", nombre: "Carlos", apellidos: "Carillo", correo: "alinemhdez@gmail.com", estado: "Hola", estadoCuenta: "activo", fotoPerfil: "foto"})
         .end( function(err,res){
             console.log(res.body)
-            expect(res).to.have.status(500);
+            expect(res).to.have.status(404);
             done();
         });
     });
@@ -77,6 +92,25 @@ describe('Update el nombre del usuario con el id',()=>{
             expect(res).to.have.status(200);
             done();
         });
+    });
+});
+describe("Usuarios", function(){
+    describe ("DELETE ALL", function(){
+        it("should remove all first", done=>{
+            console.log ("Deleting all data in db first.")
+            chai.request(app)
+                .delete("/Usuario/")
+                .send({})
+                .end((err,res)=>{
+                    //console.log (res)
+                    // console.log("err",err);
+                    res.should.have.status(200)
+                    console.log("Response Body:", res.body);
+                    // console.log (result);
+                    done();
+                });
+        });
+
     });
 });
 
