@@ -30,6 +30,18 @@ describe('#Asynchronous user crud test', () =>{
         });
     });
 });
+describe('#Insertar usuario con error', () =>{
+    it('recibe un usuario con error', done => {
+        chai.request(url)
+        .post("/Usuario")
+        .send({username: "Charlyssde", password: "secret", nombre: "Carlos", apellidos: "Carillo"})
+        .end( function(err,res){
+            console.log(res,body)
+            expect(res).to.have.status(500);
+            done();
+        });
+    });
+});
 describe('#Asynchronous user crud test', () => {
     it('obtener "usuarios" ', done => {
         chai.request(app)
@@ -41,4 +53,6 @@ describe('#Asynchronous user crud test', () => {
             });
     }).timeout(0);
 });
+
+
 
