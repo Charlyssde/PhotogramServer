@@ -5,6 +5,7 @@ var mongoose = require('mongoose');
 
 chai.should();
 chai.use(chaiHttp);
+const url = 'http://localhost:7777';
 
 before(done => {
     console.log('\n\n-----------------------\n--\n-- START TEST\n--\n-------------------------');
@@ -17,6 +18,18 @@ after(done => {
 });
 
 /* asyn test */
+describe('#Asynchronous user crud test', () =>{
+    it('agregar usuario', done => {
+        chai.request(url)
+        .post("/Usuario")
+        .send({username: "Alinemhdez", password: "secret", nombre: "aline", apellidos: "Hdez Fajardo", correo: "alinemhdez@gmail.com"})
+        .end( function(err,res){
+            console.log(res,body)
+            expect(res).to.have.status(200);
+            done();
+        });
+    });
+});
 describe('#Asynchronous user crud test', () => {
     it('obtener "usuarios" ', done => {
         chai.request(app)
@@ -28,3 +41,4 @@ describe('#Asynchronous user crud test', () => {
             });
     }).timeout(0);
 });
+
