@@ -1,7 +1,7 @@
 let chai = require('chai');
 let chaiHttp = require('chai-http');
 let app = require('../src/app');
-let url = 'http://localhost:7777/api/';
+let url = 'http://localhost:7777/api';
 let should = chai.should
 var mongoose = require('mongoose');
 
@@ -33,8 +33,8 @@ after(done => {
     }]
     it('agregar "usuario"', (done) => {
         for(usuario in usuarios){
-            chai.request(app)
-            .post("/usuarios/")
+            .post("/Usuario")
+            chai.request(url)
             .send(usuarios[usuario])
             .end((err,res)=>{
                 res.should.have.status(200);
@@ -58,17 +58,18 @@ describe('#Asynchronous user crud test', () => {
                 console.log('Salida: %s, users: %s',res.statusCode, res.body.length)
             });
     }).timeout(0);
+    it ("Should Fetch Particular Usuario only", (done)=>{
+        chai.request(url)
+            .get("/Usuario")
+            .end((err, result)=>{                    
+                result.should.have.status(200)
+                console.log("Fetched Particlar Usuario using /GET/Usuario/:UsuarioId ::::", result.body)
+                done();
+            });
+    });
 });
 
-it ("Should Fetch Particular Usuario only", (done)=>{
-    chai.request(app)
-        .get("/Usuario/Alinemhdez")
-        .end((err, result)=>{                    
-            result.should.have.status(404)
-            console.log("Fetched Particlar Usuario using /GET/Usuario/:UsuarioId ::::", result.body)
-            done();
-        });
-});
+
 
 describe('Update el nombre del usuario con el username',()=>{
     it ("Should Update Partcular Usuario Only", (done)=>{
@@ -85,7 +86,7 @@ describe('Update el nombre del usuario con el username',()=>{
         
             .put("/Usuario/Alinemhdez")
             .send(updatedUsuario)
-            .end((err, result)=>{                    
+            .end((err, res)=>{                    
                 res.should.have.status(200);
                 console.log("Updated Particlar Usuario using /GET/Usuario/:UsuarioID ::::", result.body)
                 done();
