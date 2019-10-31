@@ -1,6 +1,7 @@
 let chai = require('chai');
 let chaiHttp = require('chai-http');
 let app = require('../src/app');
+var mongoose = require('mongoose');
 
 chai.should();
 chai.use(chaiHttp);
