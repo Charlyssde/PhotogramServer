@@ -2,6 +2,9 @@ const express = require('express');
 const router = express.Router();
 const Usuario = require("../dataaccess/model/Usuario");
 
+/**
+ * Obtener todos los usuarios
+ */
 router.get("/", (req, res) => {
     Usuario.find(function (err, docs) {
         if (err) {
@@ -16,6 +19,9 @@ router.get("/", (req, res) => {
     });
 });
 
+/**
+ * Registrar un usuario nuevo
+ */
 router.post("/", (req, res) => {
     
     var username = req.body.username
@@ -27,6 +33,9 @@ router.post("/", (req, res) => {
     var estadoCuenta = req.body.estadoCuenta
     var fotoPerfil = req.body.fotoPerfil
 
+    /**
+     * Validación de los parámetros obligatorios
+     */
     if (!username || !password || !nombre || !apellidos
         || !correo) {
         res.status(400).json({
@@ -35,6 +44,9 @@ router.post("/", (req, res) => {
         return;
     }
 
+    /**
+     * Creación del nuevo usuario
+     */
     var usuario = new Usuario({
         username: username,
         password: password,
@@ -45,6 +57,9 @@ router.post("/", (req, res) => {
         estadoCuenta: estadoCuenta,
         fotoPerfil: fotoPerfil
     });
+    /**
+     * Función de guardado 
+     */
     usuario.save(function (err, doc) {
         if (err) {
             res.status(500).json({
@@ -57,6 +72,9 @@ router.post("/", (req, res) => {
     });
 });
 
+/**
+ * Actualización de los datos del usuario de acuerdo al identificador
+ */
 router.put("/:id", (req, res) => {
     var jsonId = req.params.id;
 
@@ -69,6 +87,9 @@ router.put("/:id", (req, res) => {
     var estadoCuenta = req.body.estadoCuenta
     var fotoPerfil = req.body.fotoPerfil
 
+    /**
+     * Verificación de los parámetros
+     */
     if (!username || !password || !nombre || !apellidos
         || !correo) {
         res.status(400).json({
@@ -77,6 +98,9 @@ router.put("/:id", (req, res) => {
         return;
     }
 
+    /**
+     * Función de actualización 
+     */
     Usuario.findOneAndUpdate({
         _id: jsonId},
         {
@@ -99,9 +123,17 @@ router.put("/:id", (req, res) => {
     });
 });
 
+/**
+ * Eliminación de un usuario de acuerdo a su identificador
+ */
 router.delete("/:id", (req, res) => {
     var jsonId = req.params.id;
 
+    /**
+     * Función de eliminar
+     * Regresa 500 si hay un error
+     * Regresa 200 si fue exitoso.
+     */
     Usuario.findOneAndDelete({
         _id: jsonId
     }, function (err, doc){

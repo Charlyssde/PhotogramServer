@@ -50,7 +50,7 @@ after(done => {
 
 describe('#Asynchronous user crud test', () => {
     it('obtener "usuarios" ', (done) => {
-        chai.request(app)
+        chai.request(url)
             .get("/Usuario")
             .end(function (err, res) {
                 if(err) done(err);
@@ -83,9 +83,8 @@ describe('Update el nombre del usuario con el username',()=>{
         estadoCuenta: "activo",
         fotoPerfil: "foto"
         }
-        
-        chai.request(url)
-            .put("/Usuario/Alinemhdez")
+            chai.request(url)
+            .put("/Usuario/5dbb60ca7308fa2f90367115")
             .send(updatedUsuario)
             .end((err, res)=>{                    
                 res.should.have.status(200);
@@ -100,7 +99,7 @@ describe("Usuarios", function(){
         it("should remove all first", done=>{
             console.log ("Deleting all data in db first.")
             chai.request(url)
-                .delete("/Usuario/Charlysdd")
+            .delete("/Usuario/5dbb60ca7308fa2f90367115")
                 .send({})
                 .end((err,res)=>{
                     //console.log (res)
