@@ -1,6 +1,9 @@
 const mongoose = require("../MongoConnect");
 const Schema = mongoose.Schema;
 
+/**
+ * Esquemas del moderador
+ */
 var SchemaModerador = new Schema ({
     username: {
         required: true,

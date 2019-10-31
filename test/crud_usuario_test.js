@@ -33,8 +33,8 @@ after(done => {
     }]
     it('agregar "usuario"', (done) => {
         for(usuario in usuarios){
-            chai.request(url)
-            .post("/Usuario/")
+            chai.request(app)
+            .post("/usuarios/")
             .send(usuarios[usuario])
             .end((err,res)=>{
                 res.should.have.status(200);
@@ -83,7 +83,6 @@ describe('Update el nombre del usuario con el username',()=>{
         fotoPerfil: "foto"
         }
         
-        chai.request(url)
             .put("/Usuario/Alinemhdez")
             .send(updatedUsuario)
             .end((err, result)=>{                    
@@ -98,8 +97,8 @@ describe("Usuarios", function(){
     describe ("DELETE ALL", function(){
         it("should remove all first", done=>{
             console.log ("Deleting all data in db first.")
-            chai.request(url)
                 .delete("/Usuario/Charlysdd")
+            chai.request(url)
                 .send({})
                 .end((err,res)=>{
                     //console.log (res)
