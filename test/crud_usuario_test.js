@@ -1,7 +1,7 @@
 let chai = require('chai');
 let chaiHttp = require('chai-http');
 let app = require('../src/app');
-
+let url = 'http://localhost:7777/api/';
 let should = chai.should
 var mongoose = require('mongoose');
 
@@ -33,11 +33,11 @@ after(done => {
     }]
     it('agregar "usuario"', (done) => {
         for(usuario in usuarios){
-            chai.request(app)
-            .post("/usuarios/")
+            chai.request(url)
+            .post("/Usuario/")
             .send(usuarios[usuario])
             .end((err,res)=>{
-                res.should.have.status(404);
+                res.should.have.status(200);
                 console.log("Response Body:", res.body);
             })
         }
@@ -62,7 +62,7 @@ describe('#Asynchronous user crud test', () => {
 
 it ("Should Fetch Particular Usuario only", (done)=>{
     chai.request(app)
-        .get("/Usuario/1")
+        .get("/Usuario/Alinemhdez")
         .end((err, result)=>{                    
             result.should.have.status(404)
             console.log("Fetched Particlar Usuario using /GET/Usuario/:UsuarioId ::::", result.body)
@@ -70,7 +70,7 @@ it ("Should Fetch Particular Usuario only", (done)=>{
         });
 });
 
-describe('Update el nombre del usuario con el id',()=>{
+describe('Update el nombre del usuario con el username',()=>{
     it ("Should Update Partcular Usuario Only", (done)=>{
         var updatedUsuario = {
             username: "Charlysdd",
@@ -83,11 +83,11 @@ describe('Update el nombre del usuario con el id',()=>{
         fotoPerfil: "foto"
         }
         
-        chai.request(app)
-            .put("/Usuario/1")
+        chai.request(url)
+            .put("/Usuario/Alinemhdez")
             .send(updatedUsuario)
             .end((err, result)=>{                    
-                result.should.have.status(404)
+                res.should.have.status(200);
                 console.log("Updated Particlar Usuario using /GET/Usuario/:UsuarioID ::::", result.body)
                 done();
             })
@@ -98,13 +98,13 @@ describe("Usuarios", function(){
     describe ("DELETE ALL", function(){
         it("should remove all first", done=>{
             console.log ("Deleting all data in db first.")
-            chai.request(app)
-                .delete("/Usuario/")
+            chai.request(url)
+                .delete("/Usuario/Charlysdd")
                 .send({})
                 .end((err,res)=>{
                     //console.log (res)
                     // console.log("err",err);
-                    res.should.have.status(404)
+                    res.should.have.status(200);
                     console.log("Response Body:", res.body);
                     // console.log (result);
                     done();
