@@ -37,7 +37,7 @@ after(done => {
             .post("/usuarios/")
             .send(usuarios[usuario])
             .end((err,res)=>{
-                res.should.have.status(200);
+                res.should.have.status(404);
                 console.log("Response Body:", res.body);
             })
         }
@@ -46,18 +46,8 @@ after(done => {
         });
 
 })
-describe('#Insertar usuario con error', () =>{
-    it('recibe un usuario con error', (done) => {
-        chai.request(url)
-        .post("/Usuario")
-        .send({username: "Charlyssde", password: "secret", nombre: "Carlos", apellidos: "Carillo", correo: "alinemhdez@gmail.com", estado: "Hola", estadoCuenta: "activo", fotoPerfil: "foto"})
-        .end( function(err,res){
-            console.log(res.body)
-            expect(res).to.have.status(404);
-            done();
-        });
-    });
-});
+
+
 describe('#Asynchronous user crud test', () => {
     it('obtener "usuarios" ', (done) => {
         chai.request(app)
@@ -70,29 +60,39 @@ describe('#Asynchronous user crud test', () => {
     }).timeout(0);
 });
 
-describe('#Get usuario por id',()=>{
-    it('Obtener usuario por id', (done) =>{
-        chai.request(app)
-        .get('/Usuario/1')
-        .end( function(err,res){
-            console.log(res.body)
-            expect(res.body).to.have.property('id').to.be.equal(1);
-            expect(res).to.have.status(200);
+it ("Should Fetch Particular Usuario only", (done)=>{
+    chai.request(app)
+        .get("/Usuario/1")
+        .end((err, result)=>{                    
+            result.should.have.status(404)
+            console.log("Fetched Particlar Usuario using /GET/Usuario/:UsuarioId ::::", result.body)
             done();
         });
-    });
 });
+
 describe('Update el nombre del usuario con el id',()=>{
-    it('Update del id', (done)=>{
+    it ("Should Update Partcular Usuario Only", (done)=>{
+        var updatedUsuario = {
+            username: "Charlysdd",
+        password: "secret",
+        nombre: "carlos",
+        apellidos: "Carrillo",
+        correo: "charlysdd@gmail.com",
+        estado: "Hola",
+        estadoCuenta: "activo",
+        fotoPerfil: "foto"
+        }
+        
         chai.request(app)
-        .put('/Usuario/1/nombre/montserrat')
-        .end( function(err,res){
-            console.log(res.body)
-            expect(res.body).to.have.property('nombre').to.be.equal("montserrat");
-            expect(res).to.have.status(200);
-            done();
-        });
-    });
+            .put("/Usuario/1")
+            .send(updatedUsuario)
+            .end((err, result)=>{                    
+                result.should.have.status(404)
+                console.log("Updated Particlar Usuario using /GET/Usuario/:UsuarioID ::::", result.body)
+                done();
+            })
+    })
+    
 });
 describe("Usuarios", function(){
     describe ("DELETE ALL", function(){
@@ -104,7 +104,7 @@ describe("Usuarios", function(){
                 .end((err,res)=>{
                     //console.log (res)
                     // console.log("err",err);
-                    res.should.have.status(200)
+                    res.should.have.status(404)
                     console.log("Response Body:", res.body);
                     // console.log (result);
                     done();
