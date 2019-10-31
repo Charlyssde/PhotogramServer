@@ -30,7 +30,7 @@ var UsuarioSchema = new Schema({
     },
     fotoPerfil: {
         required: false,
-        type: Image
+        type: String
     },
     estado:{
         required: false,
