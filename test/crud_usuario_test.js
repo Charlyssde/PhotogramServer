@@ -19,31 +19,32 @@ after(done => {
 
 /* asyn test */
 describe('#Asynchronous user crud test', () =>{
-    it('agregar usuario', done => {
-        chai.request(url)
+    it('agregar "usuario"', (done) => {
+        chai.request(app)
         .post("/Usuario")
-        .send({username: "Alinemhdez", password: "secret", nombre: "aline", apellidos: "Hdez Fajardo", correo: "alinemhdez@gmail.com"})
+        .send({username: "Alinemhdez", password: "secret", nombre: "aline", apellidos: "Hdez Fajardo", correo: "alinemhdez@gmail.com", estado: "Hola", estadoCuenta: "activo", fotoPerfil: "foto"})
         .end( function(err,res){
-            console.log(res,body)
+            console.log(res.body)
             expect(res).to.have.status(200);
             done();
+            
         });
-    });
+    }).timeout(0);
 });
 describe('#Insertar usuario con error', () =>{
-    it('recibe un usuario con error', done => {
+    it('recibe un usuario con error', (done) => {
         chai.request(url)
         .post("/Usuario")
-        .send({username: "Charlyssde", password: "secret", nombre: "Carlos", apellidos: "Carillo"})
+        .send({username: "Charlyssde", password: "secret", nombre: "Carlos", apellidos: "Carillo", correo: "alinemhdez@gmail.com", estado: "Hola", estadoCuenta: "activo", fotoPerfil: "foto"})
         .end( function(err,res){
-            console.log(res,body)
+            console.log(res.body)
             expect(res).to.have.status(500);
             done();
         });
     });
 });
 describe('#Asynchronous user crud test', () => {
-    it('obtener "usuarios" ', done => {
+    it('obtener "usuarios" ', (done) => {
         chai.request(app)
             .get("/Usuario")
             .end(function (err, res) {
@@ -54,17 +55,28 @@ describe('#Asynchronous user crud test', () => {
     }).timeout(0);
 });
 
-describe('#Get usuario por username',()=>{
-    it('Obtener usuario por username', (done) =>{
-        chai.request(url)
-        .get('/Usuario/Alinemhdez')
+describe('#Get usuario por id',()=>{
+    it('Obtener usuario por id', (done) =>{
+        chai.request(app)
+        .get('/Usuario/1')
         .end( function(err,res){
             console.log(res.body)
-            expect(res.body).to.have.property('username').to.be.equal("Alinemhdez");
+            expect(res.body).to.have.property('id').to.be.equal(1);
             expect(res).to.have.status(200);
             done();
         });
     });
 });
-
+describe('Update el nombre del usuario con el id',()=>{
+    it('Update del id', (done)=>{
+        chai.request(app)
+        .put('/Usuario/1/nombre/montserrat')
+        .end( function(err,res){
+            console.log(res.body)
+            expect(res.body).to.have.property('nombre').to.be.equal("montserrat");
+            expect(res).to.have.status(200);
+            done();
+        });
+    });
+});
 
