@@ -54,5 +54,17 @@ describe('#Asynchronous user crud test', () => {
     }).timeout(0);
 });
 
+describe('#Get usuario por username',()=>{
+    it('Obtener usuario por username', (done) =>{
+        chai.request(url)
+        .get('/Usuario/Alinemhdez')
+        .end( function(err,res){
+            console.log(res.body)
+            expect(res.body).to.have.property('username').to.be.equal("Alinemhdez");
+            expect(res).to.have.status(200);
+            done();
+        });
+    });
+});
 
 
