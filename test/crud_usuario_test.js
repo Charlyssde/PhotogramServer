@@ -1,7 +1,7 @@
 let chai = require('chai');
 let chaiHttp = require('chai-http');
 let app = require('../src/app');
-
+let url = 'http://localhost:7777/api/';
 let should = chai.should
 var mongoose = require('mongoose');
 
@@ -33,7 +33,7 @@ after(done => {
     }]
     it('agregar "usuario"', (done) => {
         for(usuario in usuarios){
-            chai.request(app)
+            chai.request(url)
             .post("/usuarios/")
             .send(usuarios[usuario])
             .end((err,res)=>{
@@ -83,11 +83,11 @@ describe('Update el nombre del usuario con el id',()=>{
         fotoPerfil: "foto"
         }
         
-        chai.request(app)
+        chai.request(url)
             .put("/Usuario/1")
             .send(updatedUsuario)
             .end((err, result)=>{                    
-                result.should.have.status(404)
+                result.should.have.status(200)
                 console.log("Updated Particlar Usuario using /GET/Usuario/:UsuarioID ::::", result.body)
                 done();
             })
@@ -98,13 +98,13 @@ describe("Usuarios", function(){
     describe ("DELETE ALL", function(){
         it("should remove all first", done=>{
             console.log ("Deleting all data in db first.")
-            chai.request(app)
+            chai.request(url)
                 .delete("/Usuario/")
                 .send({})
                 .end((err,res)=>{
                     //console.log (res)
                     // console.log("err",err);
-                    res.should.have.status(404)
+                    res.should.have.status(200)
                     console.log("Response Body:", res.body);
                     // console.log (result);
                     done();
