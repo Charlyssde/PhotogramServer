@@ -7,11 +7,17 @@ const config = require("../../config");
 
 router.use("/Usuario", usuarioRouter);
 
+/*
+    Petición post que realiza el login del usuario a través de su usuario y contraseña
 
+*/ 
 router.post("/login", (req, res) => {
     var username = req.body.username;
     var password = req.body.password;
 
+    /*
+    Validación de los parametros
+    */
     if (!username || !password) {
         res.status(400).json({
             message: "Invalid body params"
@@ -19,6 +25,11 @@ router.post("/login", (req, res) => {
         return
     }
 
+    /**
+     * Funcion para encontrar el usuario, regresa 404 si no existe
+     * Regresa 500 si error en el servidor
+     * Regresa 200 con el token del usuario si todo es correcto.
+     */
     Usuario.findOne({
         username: username,
         password: password
