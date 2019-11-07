@@ -31,15 +31,10 @@ var UsuarioSchema = new Schema({
         required: true,
         type: String
     },
-    fotoPerfil: {
-        required: false,
-        type: String
-    },
     estado:{
         required: false,
         type: String
     }
-
 })
 
 var Usuario = mongoose.model('Usuario', UsuarioSchema);
