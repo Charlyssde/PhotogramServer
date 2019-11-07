@@ -13,3 +13,6 @@ var ConversacionSchema = new Schema({
         type: Array,
     },
 });
+
+var Conversacion = mongoose.model('Conversacion', ConversacionSchema);
+module.exports = Conversacion;
