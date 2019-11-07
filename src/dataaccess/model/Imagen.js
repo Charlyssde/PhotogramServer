@@ -10,6 +10,14 @@ var ImagenSchema = new Schema({
     route:{
         required: true,
         type: String
+    },
+    fecha:{
+        required: true,
+        type: Date
+    },
+    bufferImg:{
+        required: true,
+        type: ArrayBuffer
     }
 });
 
