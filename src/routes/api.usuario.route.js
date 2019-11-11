@@ -19,6 +19,22 @@ router.get("/", (req, res) => {
     });
 });
 
+router.get("/:id", (req, res) =>{
+    var jsonId = req.params.id;
+
+    Usuario.findById({
+        _id:jsonId}, 
+        function(err, docs){
+        if(err){
+            res.status(500).json({
+                "message": "Error al ejecutar"
+            })
+            return
+        }
+        res.json(docs);
+    });
+});
+
 /**
  * Registrar un usuario nuevo
  */
