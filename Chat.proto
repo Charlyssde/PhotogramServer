@@ -1,0 +1,25 @@
+syntaxis = "proto3"
+
+message Mensaje {
+	string idMensaje = 1;
+	timestamp fechaEnvio = 2;
+	string contenido = 3;
+	boolean editado = 4;
+	string tipo = 5;
+}
+
+message Archivo {
+	string idArchivo = 1;
+	bytes contenido = 2;
+	string ruta = 3;
+	timestamp fecha = 4;
+}
+
+message Empty{}
+
+service Chat {
+	rpc recibirMensajes(Empty) returns (stream Mensaje);
+	rpc enviarMensaje(stream Mensaje) returns (Empty);
+}
+	
+	
