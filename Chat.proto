@@ -2,19 +2,34 @@ syntaxis = "proto3"
 
 message Mensaje {
 	string idMensaje = 1;
-	timestamp fechaEnvio = 2;
-	string contenido = 3;
-	boolean editado = 4;
-	string tipo = 5;
+	Usuario destinatario = 2;
+	Usuario remitente =3;
+	timestamp fechaEnvio = 4;
+	string contenido = 5;
+	extensions 77 to 78;
 }
 
 message Archivo {
-	string idArchivo = 1;
+	extend Mensaje {
+		required Archivo archivo = 77;
+	}
 	bytes contenido = 2;
 	string ruta = 3;
-	timestamp fecha = 4;
 }
 
+message Texto {
+	extend Mensaje{
+		required Texto texto = 78;
+	}
+	string contenido = 1;
+	boolean editado = 2;
+}
+
+message Usuario {
+	string username = 1;
+	string idUsuario = 2;
+		
+}
 message Empty{}
 
 service Chat {
