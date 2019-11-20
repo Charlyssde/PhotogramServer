@@ -38,25 +38,24 @@ router.get("/:id", (req, res) =>{
 /**
  * Registrar un usuario nuevo
  */
-router.post("/", (req, res) => {
+router.post('/registro', (req, res) => {
     
     var username = req.body.username
     var password = req.body.password
     var nombre = req.body.nombre
-    var apellidos = req.body.apellidos
+    var apellidoPaterno = req.body.apellidoP
+    var apellidoMaterno = req.body.apellidoM
     var correo = req.body.correo
     var estado = req.body.estado
     var estadoCuenta = req.body.estadoCuenta
-    var fotoPerfil = req.body.fotoPerfil
+    //var fotoPerfil = req.body.fotoPerfil
 
     /**
      * Validación de los parámetros obligatorios
      */
-    if (!username || !password || !nombre || !apellidos
+    if (!username || !password || !nombre || !apellidoP || !apellidoM
         || !correo) {
-        res.status(400).json({
-            "message": "Parametros inválidos"
-        })
+        res.status(400).json(err)
         return;
     }
 
@@ -67,19 +66,20 @@ router.post("/", (req, res) => {
         username: username,
         password: password,
         nombre: nombre,
-        apellidos: apellidos,
+        apellidoPaterno: apellidoP,
+        apellidoMaterno: apellidoM,
         correo: correo,
         estado: estado,
         estadoCuenta: estadoCuenta,
-        fotoPerfil: fotoPerfil
+        //FotoPerfil?
     });
     /**
-     * Función de guardado 
+     * Función de registro 
      */
     usuario.save(function (err, doc) {
         if (err) {
             res.status(500).json({
-                message: "Error durante el guardado"
+                message: "Error durante el registro"
             })
             console.error(err);
             return;
