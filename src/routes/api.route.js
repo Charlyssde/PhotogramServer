@@ -20,7 +20,9 @@ router.post("/login", (req, res) => {
     */
     if (!username || !password) {
         res.status(400).json({
-            message: "Invalid body params"
+            message: "Invalid body params",
+            'reponse' : req.body
+
         })
         return
     }

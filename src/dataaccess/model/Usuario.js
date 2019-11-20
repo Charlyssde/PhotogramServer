@@ -29,11 +29,11 @@ var UsuarioSchema = new Schema({
     },
     correo: {
         required: true,
-        type: String,
+        type: String
     },
     estadoCuenta: {
         required: true,
-        type: String
+        type: Boolean
     },
     estado:{
         required: false,

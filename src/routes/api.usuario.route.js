@@ -5,7 +5,7 @@ const Usuario = require("../dataaccess/model/Usuario");
 /**
  * Obtener todos los usuarios
  */
-router.get("/", (req, res) => {
+router.get("/getAll", (req, res) => {
     Usuario.find(function (err, docs) {
         if (err) {
             res.status(500).json({
@@ -53,9 +53,11 @@ router.post('/registro', (req, res) => {
     /**
      * Validación de los parámetros obligatorios
      */
-    if (!username || !password || !nombre || !apellidoP || !apellidoM
+    if (!username || !password || !nombre || !apellidoPaterno || !apellidoMaterno
         || !correo) {
-        res.status(400).json(err)
+        res.status(400).json({
+            'response' : req.body
+        })
         return;
     }
 
@@ -66,8 +68,8 @@ router.post('/registro', (req, res) => {
         username: username,
         password: password,
         nombre: nombre,
-        apellidoPaterno: apellidoP,
-        apellidoMaterno: apellidoM,
+        apellidoPaterno: apellidoPaterno,
+        apellidoMaterno: apellidoMaterno,
         correo: correo,
         estado: estado,
         estadoCuenta: estadoCuenta,
