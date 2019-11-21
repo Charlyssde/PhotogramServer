@@ -1,33 +1,34 @@
-syntaxis = "proto3"
+syntax = "proto2";
+import "google/protobuf/timestamp.proto";
 
 message Mensaje {
-	string idMensaje = 1;
-	Usuario destinatario = 2;
-	Usuario remitente =3;
-	timestamp fechaEnvio = 4;
-	string contenido = 5;
+	required string idMensaje = 1;
+	required Usuario destinatario = 2;
+	required Usuario remitente =3;
+	required google.protobuf.Timestamp fechaEnvio = 4;
+	required string contenido = 5;
 	extensions 77 to 78;
 }
 
 message Archivo {
 	extend Mensaje {
-		required Archivo archivo = 77;
+		optional Archivo archivo = 77;
 	}
-	bytes contenido = 2;
-	string ruta = 3;
+	required bytes contenido = 2;
+	required string ruta = 3;
 }
 
 message Texto {
 	extend Mensaje{
-		required Texto texto = 78;
+		optional Texto texto = 78;
 	}
-	string contenido = 1;
-	boolean editado = 2;
+	required string contenido = 1;
+	required bool editado = 2;
 }
 
 message Usuario {
-	string username = 1;
-	string idUsuario = 2;
+	required string username = 1;
+	required string idUsuario = 2;
 		
 }
 message Empty{}
