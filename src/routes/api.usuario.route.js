@@ -5,11 +5,12 @@ const Usuario = require("../dataaccess/model/Usuario");
 /**
  * Obtener todos los usuarios
  */
-router.get("/getAll", (req, res) => {
+router.get("/getAllusers", (req, res) => {
     Usuario.find(function (err, docs) {
         if (err) {
             res.status(500).json({
-                "message": "Hubo un error al ejecutar la consulta"
+                "message": "Hubo un error al ejecutar la consulta",
+                "error" : err
             })
             console.error(err);
             return;
@@ -30,7 +31,8 @@ router.get("/:id", (req, res) =>{
         function(err, docs){
         if(err){
             res.status(500).json({
-                "message": "Error al ejecutar"
+                "message": "Error al ejecutar",
+                "error" : err
             })
             return
         }
@@ -59,7 +61,8 @@ router.post('/registro', (req, res) => {
     if (!username || !password || !nombre || !apellidoPaterno || !apellidoMaterno
         || !correo) {
         res.status(400).json({
-            'response' : req.body
+            'request' : req.body,
+            "error" : err
         })
         return;
     }
@@ -84,7 +87,8 @@ router.post('/registro', (req, res) => {
     usuario.save(function (err, doc) {
         if (err) {
             res.status(500).json({
-                message: "Error durante el registro"
+                message: "Error durante el registro",
+                "error" : err
             })
             console.error(err);
             return;
@@ -115,7 +119,8 @@ router.put(`/update?:id`, (req, res) => {
     if (!username || !password || !nombre || !apellidoPaterno || !apellidoMaterno
         || !correo) {
         res.status(400).json({
-            "message": "Parametros inválidos"
+            "message": "Parametros inválidos",
+            "error" : err
         })
         return;
     }
@@ -125,7 +130,8 @@ router.put(`/update?:id`, (req, res) => {
      */
     Usuario.findOneAndUpdate({
         _id: jsonId},
-        {
+        {$set:
+            {
             username: username,
             password: password,
             nombre: nombre,
@@ -135,11 +141,13 @@ router.put(`/update?:id`, (req, res) => {
             estado: estado,
             estadoCuenta: estadoCuenta
             //fotoPerfil: fotoPerfil
+            }            
         }, function (err, doc){
             if(err){
                 res.status(500).json({
-                    message: "error al actualizar",
-                    "response" : req.body
+                    message: "Error al actualizar",
+                    "response" : req.body,
+                    "error" : err
                 })
                 return;
             }    
@@ -163,7 +171,8 @@ router.delete("/:id", (req, res) => {
     }, function (err, doc){
         if (err) {
             res.status(500).json({
-                message: "Error al eliminar"
+                message: "Error al eliminar",
+                "error" : err
             })
             return;
         }
