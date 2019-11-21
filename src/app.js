@@ -3,11 +3,13 @@ const app = express();
 const config = require("../config");
 const apiRoute = require('./routes/api.route');
 const apiUsuarioRoute = require('./routes/api.usuario.route');
+const apiImagenRoute = require('./routes/api.imagen.route');
 const bodyParser = require("body-parser");
 
 app.use(bodyParser.json({limit: '10mb'}));
 app.use("/api", apiRoute);
 app.use('/api', apiUsuarioRoute);
+app.use('/api', apiImagenRoute);
 
 /**
  * Inicialización del servidor

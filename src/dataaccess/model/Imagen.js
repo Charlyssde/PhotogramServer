@@ -2,23 +2,19 @@ const mongoose = require("../MongoConnect");
 const Schema = mongoose.Schema;
 
 var ImagenSchema = new Schema({
-    name:{
+    path:{
+        required: true,
         unique: true,
+        type: String
+    },
+    username:{
         required: true,
         type: String,
-    },
-    route:{
-        required: true,
-        type: String
     },
     fecha:{
         required: true,
         type: Date
     },
-    bufferImg:{
-        required: true,
-        type: ArrayBuffer
-    }
 });
 
 var Imagen = mongoose.model('Imagen', ImagenSchema);

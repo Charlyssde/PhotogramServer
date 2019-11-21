@@ -100,7 +100,7 @@ router.post('/registro', (req, res) => {
 /**
  * Actualización de los datos del usuario de acuerdo al identificador
  */
-router.put(`/update?:id`, (req, res) => {
+router.put(`/update/:id`, (req, res) => {
     var jsonId = req.params.id;
 
     var username = req.body.username
@@ -142,7 +142,7 @@ router.put(`/update?:id`, (req, res) => {
             estadoCuenta: estadoCuenta
             //fotoPerfil: fotoPerfil
             }            
-        }, function (err, doc){
+        }, function (err, docs){
             if(err){
                 res.status(500).json({
                     message: "Error al actualizar",
@@ -158,7 +158,7 @@ router.put(`/update?:id`, (req, res) => {
 /**
  * Eliminación de un usuario de acuerdo a su identificador
  */
-router.delete("/:id", (req, res) => {
+router.delete("/user/:id", (req, res) => {
     var jsonId = req.params.id;
 
     /**
