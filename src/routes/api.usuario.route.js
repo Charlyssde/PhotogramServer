@@ -19,6 +19,9 @@ router.get("/getAll", (req, res) => {
     });
 });
 
+/**
+ * Obtener a un Usuario por su ID
+ */
 router.get("/:id", (req, res) =>{
     var jsonId = req.params.id;
 
@@ -36,7 +39,7 @@ router.get("/:id", (req, res) =>{
 });
 
 /**
- * Registrar un usuario nuevo
+ * Registrar un usuario nuevo y guardarlo en la BD
  */
 router.post('/registro', (req, res) => {
     
@@ -93,22 +96,23 @@ router.post('/registro', (req, res) => {
 /**
  * Actualización de los datos del usuario de acuerdo al identificador
  */
-router.put("/:id", (req, res) => {
+router.put(`/update?:id`, (req, res) => {
     var jsonId = req.params.id;
 
     var username = req.body.username
     var password = req.body.password
     var nombre = req.body.nombre
-    var apellidos = req.body.apellidos
+    var apellidoPaterno = req.body.apellidoPaterno
+    var apellidoMaterno = req.body.apellidoMaterno
     var correo = req.body.correo
     var estado = req.body.estado
     var estadoCuenta = req.body.estadoCuenta
-    var fotoPerfil = req.body.fotoPerfil
+    //var fotoPerfil = req.body.fotoPerfil
 
     /**
      * Verificación de los parámetros
      */
-    if (!username || !password || !nombre || !apellidos
+    if (!username || !password || !nombre || !apellidoPaterno || !apellidoMaterno
         || !correo) {
         res.status(400).json({
             "message": "Parametros inválidos"
@@ -125,15 +129,17 @@ router.put("/:id", (req, res) => {
             username: username,
             password: password,
             nombre: nombre,
-            apellidos: apellidos,
+            apellidoPaterno : apellidoPaterno,
+            apellidoMaterno : apellidoMaterno,
             correo: correo,
             estado: estado,
-            estadoCuenta: estadoCuenta,
-            fotoPerfil: fotoPerfil
+            estadoCuenta: estadoCuenta
+            //fotoPerfil: fotoPerfil
         }, function (err, doc){
             if(err){
                 res.status(500).json({
-                    message: "error al actualizar"
+                    message: "error al actualizar",
+                    "response" : req.body
                 })
                 return;
             }    
