@@ -19,17 +19,21 @@ var UsuarioSchema = new Schema({
         required: true,
         type: String
     },
-    apellidos:{
+    apellidoPaterno:{
+        required: true,
+        type: String
+    },
+    apellidoMaterno:{
         required: true,
         type: String
     },
     correo: {
         required: true,
-        type: String,
+        type: String
     },
     estadoCuenta: {
         required: true,
-        type: String
+        type: Boolean
     },
     estado:{
         required: false,
