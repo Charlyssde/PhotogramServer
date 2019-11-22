@@ -5,5 +5,13 @@ var ReaccionSchema = new Schema({
     name:{
         type: String,
         required: true,
-    }
+    },
+    username:{
+        type: String,
+        requires: true,
+    },
+    fecha:{
+        type: Date,
+        required: true
+    } 
 });

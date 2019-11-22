@@ -111,13 +111,14 @@ router.put(`/update/:id`, (req, res) => {
     var correo = req.body.correo
     var estado = req.body.estado
     var estadoCuenta = req.body.estadoCuenta
+    var amigos = req.body.amigos
     //var fotoPerfil = req.body.fotoPerfil
 
     /**
      * Verificación de los parámetros
      */
     if (!username || !password || !nombre || !apellidoPaterno || !apellidoMaterno
-        || !correo) {
+        || !correo || !amigos) {
         res.status(400).json({
             "message": "Parametros inválidos",
             "error" : err
@@ -139,7 +140,8 @@ router.put(`/update/:id`, (req, res) => {
             apellidoMaterno : apellidoMaterno,
             correo: correo,
             estado: estado,
-            estadoCuenta: estadoCuenta
+            estadoCuenta: estadoCuenta,
+            amigos: amigos
             //fotoPerfil: fotoPerfil
             }            
         }, function (err, docs){

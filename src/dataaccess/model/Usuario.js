@@ -38,7 +38,12 @@ var UsuarioSchema = new Schema({
     estado:{
         required: false,
         type: String
+    },
+    amigos:{
+        required: false,
+        type: Array
     }
+
 })
 
 var Usuario = mongoose.model('Usuario', UsuarioSchema);
