@@ -14,8 +14,13 @@ message Archivo {
 	extend Mensaje {
 		optional Archivo archivo = 77;
 	}
+<<<<<<< Updated upstream
 	required bytes contenido = 2;
 	required string ruta = 3;
+=======
+	bytes contenido = 1;
+	string ruta = 2;
+>>>>>>> Stashed changes
 }
 
 message Texto {
