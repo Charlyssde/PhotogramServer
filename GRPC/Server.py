@@ -5,8 +5,11 @@ from concurrent import futures
 
 class ChatServer(str_grpc.ChatServicer):
     def __init__(self, *args, **kwargs):
-        ##
-        print()
+        self.conversaciones = list()
+
+    def abrirConversacion(self, request):
+        if request.key not in self.conversaciones:
+            print()
     
     def recibirMensajes(self, request, context):
         while True:
