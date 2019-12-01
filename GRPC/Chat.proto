@@ -40,9 +40,9 @@ message Conversacion{
 message Empty{}
 
 service Chat {
-	rpc iniciarConversacion(Conversacion) returns (Empty);
-	rpc recibirMensajes(Empty) returns (stream Mensaje);
-	rpc enviarMensaje(Conversacion, stream Mensaje) returns (Empty);
+	rpc iniciarConversacion(Conversacion) returns (Conversacion);
+	rpc recibirMensajes(Empty) returns (Conversacion);
+	rpc enviarMensaje(Conversacion) returns (Empty);
 }
 	
 	

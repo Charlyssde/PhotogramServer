@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto2',
   serialized_options=None,
-  serialized_pb=_b('\n\nChat.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xa2\x01\n\x07Mensaje\x12\x11\n\tidMensaje\x18\x01 \x02(\t\x12\x1e\n\x0c\x64\x65stinatario\x18\x02 \x02(\x0b\x32\x08.Usuario\x12\x1b\n\tremitente\x18\x03 \x02(\x0b\x32\x08.Usuario\x12.\n\nfechaEnvio\x18\x04 \x02(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x11\n\tcontenido\x18\x05 \x02(\t*\x04\x08M\x10O\"O\n\x07\x41rchivo\x12\x11\n\tcontenido\x18\x02 \x02(\x0c\x12\x0c\n\x04ruta\x18\x03 \x02(\t2#\n\x07\x61rchivo\x12\x08.Mensaje\x18M \x01(\x0b\x32\x08.Archivo\"L\n\x05Texto\x12\x11\n\tcontenido\x18\x01 \x02(\t\x12\x0f\n\x07\x65\x64itado\x18\x02 \x02(\x08\x32\x1f\n\x05texto\x12\x08.Mensaje\x18N \x01(\x0b\x32\x06.Texto\".\n\x07Usuario\x12\x10\n\x08username\x18\x01 \x02(\t\x12\x11\n\tidUsuario\x18\x02 \x02(\t\"S\n\x0c\x43onversacion\x12\x0b\n\x03key\x18\x01 \x02(\t\x12\x1a\n\x08usuarios\x18\x02 \x03(\x0b\x32\x08.Usuario\x12\x1a\n\x08mensajes\x18\x03 \x03(\x0b\x32\x08.Mensaje\"\x07\n\x05\x45mpty2R\n\x04\x43hat\x12%\n\x0frecibirMensajes\x12\x06.Empty\x1a\x08.Mensaje0\x01\x12#\n\renviarMensaje\x12\x08.Mensaje\x1a\x06.Empty(\x01')
+  serialized_pb=_b('\n\nChat.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x82\x01\n\x07Mensaje\x12\x11\n\tidMensaje\x18\x01 \x02(\t\x12\x1b\n\tremitente\x18\x02 \x02(\x0b\x32\x08.Usuario\x12.\n\nfechaEnvio\x18\x03 \x02(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x11\n\tcontenido\x18\x04 \x02(\t*\x04\x08M\x10O\"O\n\x07\x41rchivo\x12\x11\n\tcontenido\x18\x02 \x02(\x0c\x12\x0c\n\x04ruta\x18\x03 \x02(\t2#\n\x07\x61rchivo\x12\x08.Mensaje\x18M \x01(\x0b\x32\x08.Archivo\"L\n\x05Texto\x12\x11\n\tcontenido\x18\x01 \x02(\t\x12\x0f\n\x07\x65\x64itado\x18\x02 \x02(\x08\x32\x1f\n\x05texto\x12\x08.Mensaje\x18N \x01(\x0b\x32\x06.Texto\".\n\x07Usuario\x12\x10\n\x08username\x18\x01 \x02(\t\x12\x11\n\tidUsuario\x18\x02 \x02(\t\"S\n\x0c\x43onversacion\x12\x0b\n\x03key\x18\x01 \x02(\t\x12\x1a\n\x08usuarios\x18\x02 \x03(\x0b\x32\x08.Usuario\x12\x1a\n\x08mensajes\x18\x03 \x03(\x0b\x32\x08.Mensaje\"\x07\n\x05\x45mpty2\x8d\x01\n\x04\x43hat\x12\x33\n\x13iniciarConversacion\x12\r.Conversacion\x1a\r.Conversacion\x12(\n\x0frecibirMensajes\x12\x06.Empty\x1a\r.Conversacion\x12&\n\renviarMensaje\x12\r.Conversacion\x1a\x06.Empty')
   ,
   dependencies=[google_dot_protobuf_dot_timestamp__pb2.DESCRIPTOR,])
 
@@ -42,29 +42,22 @@ _MENSAJE = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='destinatario', full_name='Mensaje.destinatario', index=1,
+      name='remitente', full_name='Mensaje.remitente', index=1,
       number=2, type=11, cpp_type=10, label=2,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='remitente', full_name='Mensaje.remitente', index=2,
+      name='fechaEnvio', full_name='Mensaje.fechaEnvio', index=2,
       number=3, type=11, cpp_type=10, label=2,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='fechaEnvio', full_name='Mensaje.fechaEnvio', index=3,
-      number=4, type=11, cpp_type=10, label=2,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='contenido', full_name='Mensaje.contenido', index=4,
-      number=5, type=9, cpp_type=9, label=2,
+      name='contenido', full_name='Mensaje.contenido', index=3,
+      number=4, type=9, cpp_type=9, label=2,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -82,7 +75,7 @@ _MENSAJE = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=48,
-  serialized_end=210,
+  serialized_end=178,
 )
 
 
@@ -126,8 +119,8 @@ _ARCHIVO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=212,
-  serialized_end=291,
+  serialized_start=180,
+  serialized_end=259,
 )
 
 
@@ -171,8 +164,8 @@ _TEXTO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=293,
-  serialized_end=369,
+  serialized_start=261,
+  serialized_end=337,
 )
 
 
@@ -209,8 +202,8 @@ _USUARIO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=371,
-  serialized_end=417,
+  serialized_start=339,
+  serialized_end=385,
 )
 
 
@@ -254,8 +247,8 @@ _CONVERSACION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=419,
-  serialized_end=502,
+  serialized_start=387,
+  serialized_end=470,
 )
 
 
@@ -278,11 +271,10 @@ _EMPTY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=504,
-  serialized_end=511,
+  serialized_start=472,
+  serialized_end=479,
 )
 
-_MENSAJE.fields_by_name['destinatario'].message_type = _USUARIO
 _MENSAJE.fields_by_name['remitente'].message_type = _USUARIO
 _MENSAJE.fields_by_name['fechaEnvio'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
 _CONVERSACION.fields_by_name['usuarios'].message_type = _USUARIO
@@ -349,24 +341,33 @@ _CHAT = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=513,
-  serialized_end=595,
+  serialized_start=482,
+  serialized_end=623,
   methods=[
+  _descriptor.MethodDescriptor(
+    name='iniciarConversacion',
+    full_name='Chat.iniciarConversacion',
+    index=0,
+    containing_service=None,
+    input_type=_CONVERSACION,
+    output_type=_CONVERSACION,
+    serialized_options=None,
+  ),
   _descriptor.MethodDescriptor(
     name='recibirMensajes',
     full_name='Chat.recibirMensajes',
-    index=0,
+    index=1,
     containing_service=None,
     input_type=_EMPTY,
-    output_type=_MENSAJE,
+    output_type=_CONVERSACION,
     serialized_options=None,
   ),
   _descriptor.MethodDescriptor(
     name='enviarMensaje',
     full_name='Chat.enviarMensaje',
-    index=1,
+    index=2,
     containing_service=None,
-    input_type=_MENSAJE,
+    input_type=_CONVERSACION,
     output_type=_EMPTY,
     serialized_options=None,
   ),

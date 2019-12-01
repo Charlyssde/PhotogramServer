@@ -7,16 +7,20 @@ def main():
     host = 'localhost'
     port = 1337
 
-    with open('serverchat.csr', 'rb') as f:
-        trusted_certs = f.read()
-
-    credentials = grpc.ssl_channel_credentials(root_certificates=trusted_certs)
-    channel = grpc.secure_channel('{}:{}'.format(host, port), credentials)
+    channel = grpc.insecure_channel(host + ':' + str(port))
 
     stub = str_grpc.ChatStub(channel)
-    stub.recibirMensajes(structure.Empty())
+    user = structure.Usuario(username = "user1", idUsuario = "1")
+    user2 = structure.Usuario(username = "user2", idUsuario = "2")
+    listaU = list()
+    listaU.append(user)
+    listaU.append(user2)
+    listaM = list()
+    conv = structure.Conversacion(key = "1", usuarios = listaU, mensajes = listaM)
+    response = stub.iniciarConversacion(conv)
 
-    print('Done')
+
+    print(response)
 
 if __name__ == '__main__':
     main()
