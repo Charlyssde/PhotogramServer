@@ -62,7 +62,7 @@ router.post('/registro', (req, res) => {
         || !correo) {
         res.status(400).json({
             'request' : req.body,
-            "error" : err
+            "error" : "err"
         })
         return;
     }
@@ -87,8 +87,7 @@ router.post('/registro', (req, res) => {
     usuario.save(function (err, doc) {
         if (err) {
             res.status(500).json({
-                message: "Error durante el registro",
-                "error" : err
+                message: "Error durante el registro"
             })
             console.error(err);
             return;
