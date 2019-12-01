@@ -14,14 +14,19 @@ class ChatStub(object):
     Args:
       channel: A grpc.Channel.
     """
-    self.recibirMensajes = channel.unary_stream(
+    self.iniciarConversacion = channel.unary_unary(
+        '/Chat/iniciarConversacion',
+        request_serializer=Chat__pb2.Conversacion.SerializeToString,
+        response_deserializer=Chat__pb2.Conversacion.FromString,
+        )
+    self.recibirMensajes = channel.unary_unary(
         '/Chat/recibirMensajes',
         request_serializer=Chat__pb2.Empty.SerializeToString,
-        response_deserializer=Chat__pb2.Mensaje.FromString,
+        response_deserializer=Chat__pb2.Conversacion.FromString,
         )
-    self.enviarMensaje = channel.stream_unary(
+    self.enviarMensaje = channel.unary_unary(
         '/Chat/enviarMensaje',
-        request_serializer=Chat__pb2.Mensaje.SerializeToString,
+        request_serializer=Chat__pb2.Conversacion.SerializeToString,
         response_deserializer=Chat__pb2.Empty.FromString,
         )
 
@@ -30,6 +35,13 @@ class ChatServicer(object):
   # missing associated documentation comment in .proto file
   pass
 
+  def iniciarConversacion(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
   def recibirMensajes(self, request, context):
     # missing associated documentation comment in .proto file
     pass
@@ -37,7 +49,7 @@ class ChatServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
-  def enviarMensaje(self, request_iterator, context):
+  def enviarMensaje(self, request, context):
     # missing associated documentation comment in .proto file
     pass
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -47,14 +59,19 @@ class ChatServicer(object):
 
 def add_ChatServicer_to_server(servicer, server):
   rpc_method_handlers = {
-      'recibirMensajes': grpc.unary_stream_rpc_method_handler(
+      'iniciarConversacion': grpc.unary_unary_rpc_method_handler(
+          servicer.iniciarConversacion,
+          request_deserializer=Chat__pb2.Conversacion.FromString,
+          response_serializer=Chat__pb2.Conversacion.SerializeToString,
+      ),
+      'recibirMensajes': grpc.unary_unary_rpc_method_handler(
           servicer.recibirMensajes,
           request_deserializer=Chat__pb2.Empty.FromString,
-          response_serializer=Chat__pb2.Mensaje.SerializeToString,
+          response_serializer=Chat__pb2.Conversacion.SerializeToString,
       ),
-      'enviarMensaje': grpc.stream_unary_rpc_method_handler(
+      'enviarMensaje': grpc.unary_unary_rpc_method_handler(
           servicer.enviarMensaje,
-          request_deserializer=Chat__pb2.Mensaje.FromString,
+          request_deserializer=Chat__pb2.Conversacion.FromString,
           response_serializer=Chat__pb2.Empty.SerializeToString,
       ),
   }

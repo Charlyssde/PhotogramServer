@@ -10,7 +10,7 @@ const config = require("../../config");
 router.use("/Usuario", usuarioRouter);
 router.use("/Moderador", moderadorRouter);
 
-outer.post("/loginModerador", (req, res) => {
+router.post("/loginModerador", (req, res) => {
     var username = req.body.username;
     var password = req.body.password;
 

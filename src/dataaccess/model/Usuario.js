@@ -33,7 +33,7 @@ var UsuarioSchema = new Schema({
     },
     estadoCuenta: {
         required: true,
-        type: Boolean
+        type: String
     },
     estado:{
         required: false,
