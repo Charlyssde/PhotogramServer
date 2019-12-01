@@ -49,7 +49,7 @@ router.post("/", (req, res) => {
      * Regresa 500 si hay un error,
      * Regresa 200 si fue exitoso
      */
-    moderador.save(function (err, doc) {
+    moderador.save(function(err, doc) {
         if (err) {
             res.status(500).json({
                 message: "Error al guardar"
