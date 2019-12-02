@@ -61,7 +61,7 @@ router.post('/registro', (req, res) => {
     if (!username || !password || !nombre || !apellidoPaterno || !apellidoMaterno
         || !correo) {
         res.status(400).json({
-            'request' : req.body,
+            "request" : req.body,
             "error" : "err"
         })
         return;
@@ -87,7 +87,7 @@ router.post('/registro', (req, res) => {
     usuario.save(function (err, doc) {
         if (err) {
             res.status(500).json({
-                message: "Error durante el registro"
+                "message": "Error durante el registro"
             })
             console.error(err);
             return;
