@@ -28,13 +28,13 @@ after(done => {
         apellidos: "Hdez Fajardo",
         correo: "alinemhdez@gmail.com",
         estado: "Hola",
-        estadoCuenta: "activo",
-        fotoPerfil: "foto"
+        estadoCuenta: "true",
+        //fotoPerfil: "foto"
     }]
     it('agregar "usuario"', (done) => {
         for(usuario in usuarios){
             chai.request(url)
-            .post("/Usuario")
+            .post("/registro")
             .send(usuarios[usuario])
             .end((err,res)=>{
                 res.should.have.status(200);
@@ -51,7 +51,7 @@ after(done => {
 describe('#Asynchronous user crud test', () => {
     it('obtener "usuarios" ', (done) => {
         chai.request(url)
-            .get("/Usuario")
+            .get("/getAllusers")
             .end(function (err, res) {
                 if(err) done(err);
                 done();
@@ -60,7 +60,7 @@ describe('#Asynchronous user crud test', () => {
     }).timeout(0);
     it ("Should Fetch Particular Usuario only", (done)=>{
         chai.request(url)
-            .get("/Usuario")
+            .get("/5dbb60ca7308fa2f90367115")
             .end((err, result)=>{                    
                 result.should.have.status(200)
                 console.log("Fetched Particlar Usuario using /GET/Usuario/:UsuarioId ::::", result.body)
@@ -80,11 +80,11 @@ describe('Update el nombre del usuario con el username',()=>{
         apellidos: "Carrillo",
         correo: "charlysdd@gmail.com",
         estado: "Hola",
-        estadoCuenta: "activo",
-        fotoPerfil: "foto"
+        estadoCuenta: "true",
+        //fotoPerfil: "foto"
         }
             chai.request(url)
-            .put("/Usuario/5dbb60ca7308fa2f90367115")
+            .put("/update/5dbb60ca7308fa2f90367115")
             .send(updatedUsuario)
             .end((err, res)=>{                    
                 res.should.have.status(200);
@@ -99,7 +99,7 @@ describe("Usuarios", function(){
         it("should remove all first", done=>{
             console.log ("Deleting all data in db first.")
             chai.request(url)
-            .delete("/Usuario/5dbb60ca7308fa2f90367115")
+            .delete("/user/5dbb60ca7308fa2f90367115")
                 .send({})
                 .end((err,res)=>{
                     //console.log (res)
