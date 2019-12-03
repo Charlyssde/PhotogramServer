@@ -22,11 +22,7 @@ var ImagenSchema = new Schema({
     reacciones:{
         required:false,
         type: Array,
-    }
-    bytes:{
-        required:true,
-        type: ArrayBuffer
-    }
+    },
 });
 
 var Imagen = mongoose.model('Imagen', ImagenSchema);

@@ -1,6 +1,15 @@
 const express = require('express')
 const router = express.Router()
+
+const multer = require('multer')
+const destination = (req, file, cb)=>{cb(null, './imgs/')}
+const filename = (req, file, cb) =>{cb(null, new Date().toISOString() + '_' + file.originalname)}
+const storage = multer.diskStorage({destination, filename})
+const upload = multer({storage: storage})
+
 const Imagen = require('../dataaccess/model/Imagen')
+
+
 
 /**
  * Obtener todas las fotos en la BD. (No será usada por el Cliente)
@@ -38,23 +47,36 @@ router.get('/img/getImg/:id', (req, res) =>{
 })
 
 /**
- * Crear un nuevo objeto Foto. Usado al subir una foto desde el cliente
+ * Crear un nuevo objeto Foto. Usado al subir una foto desde el cliente.
+ * IMPORTANTE: Los campos de la petición deben coincidir en nombre con los campos declarados abajo.
+ * En especial la IMAGEN en la petición deberá ser declarada como: newImage
  */
-router.post('/img/new', (req, res)=>{
+router.post('/img/new', upload.single('newImage'), async (req, res)=>{
+    
+    /**
+     * Validación de la existencia del archivo en la petición
+     */
+     if(!req.file){
+         res.status(400).json({
+             'message' : 'Error en los parámetros. No hay ningún archivo.',
+             'req' : res.body,
+         })
+     }
+
     var username = req.body.username;
     let fecha = new Date();
-    var path = req.body.path //Verificar dónde se genera el path
+    //var path = req.body.path //Verificar dónde se genera el path
 
     /**
      * Validación de los parámetros obligatorios
      */
 
-     if(!username || !fecha || !path){
+     if(!username || !fecha){
          res.status(400).json({
              'mensaje' : 'Parámetros incompletos',
              'error' : err
          })
-         return
+         return 
      }
 
      /**
@@ -63,13 +85,13 @@ router.post('/img/new', (req, res)=>{
      var img = new Imagen({
          username: username,
          fecha: fecha,
-         path: path
+         path: req.file.path
      })
 
-     img.save(function (err, doc){
+     await img.save( function (err, doc){
          if(err){
              res.status(500).json({
-                 'mensaje' : 'Hubo un erro al subir la imagen',
+                 'mensaje' : 'Hubo un error al subir la imagen',
                  'error' : err
              })
              console.error(err)
@@ -77,7 +99,7 @@ router.post('/img/new', (req, res)=>{
          }
          res.json(doc)
      })
-})
+}),
 
 /**
  * Recuperar todos los objetos Imagen de un Usuario en específico
@@ -104,7 +126,7 @@ router.get('/img/getImgsUser/:username', (req, res)=>{
         }
         res.json(docs)
     })
-})
+}),
 
 /**
  * Recuperar todas las Imágenes de los amigos de un Usuario determinado
@@ -133,6 +155,6 @@ router.get('/img/getFeed', (req, res)=>{
     })
 
     
-})
+}),
 
 module.exports = router
