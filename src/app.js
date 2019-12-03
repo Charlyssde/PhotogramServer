@@ -20,4 +20,5 @@ app.listen(config.PORT, config.BINDIND_IP, function() {
     console.log("App listening on " + config.BINDIND_IP + " at " + config.PORT);
 })
 
+app.use('/static', express.static('imgs'));
 module.exports = app;
