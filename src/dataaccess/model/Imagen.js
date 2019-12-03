@@ -15,6 +15,14 @@ var ImagenSchema = new Schema({
         required: true,
         type: Date
     },
+    comentarios:{
+        required: false,
+        type: Array,
+    },
+    reacciones:{
+        required:false,
+        type: Array,
+    }
     bytes:{
         required:true,
         type: ArrayBuffer
