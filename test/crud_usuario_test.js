@@ -1,4 +1,4 @@
-let chai = require('chai');
+/**let chai = require('chai');
 let chaiHttp = require('chai-http');
 let app = require('../src/app');
 let url = 'http://localhost:7777/api';
@@ -19,7 +19,7 @@ after(done => {
     done();
 });
 
-/* asyn test */
+/* asyn test 
  describe('#Asynchronous user crud test', () =>{
     var usuarios = [{
         username: "Alinemhdez",
@@ -114,3 +114,4 @@ describe("Usuarios", function(){
     });
 });
 
+**/

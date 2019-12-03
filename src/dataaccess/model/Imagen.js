@@ -23,6 +23,9 @@ var ImagenSchema = new Schema({
         required:false,
         type: Array,
     },
+    favorito:{
+        required: false,
+    }
 });
 
 var Imagen = mongoose.model('Imagen', ImagenSchema);
