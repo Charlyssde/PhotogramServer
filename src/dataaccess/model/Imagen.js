@@ -15,6 +15,10 @@ var ImagenSchema = new Schema({
         required: true,
         type: Date
     },
+    bytes:{
+        required:true,
+        type: ArrayBuffer
+    }
 });
 
 var Imagen = mongoose.model('Imagen', ImagenSchema);
