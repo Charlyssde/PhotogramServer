@@ -3,7 +3,7 @@ const router = express.Router()
 
 const multer = require('multer')
 const destination = (req, file, cb)=>{cb(null, './imgs/')}
-const filename = (req, file, cb) =>{cb(null, new Date().toISOString() + '_' + file.originalname)}
+const filename = (req, file, cb) =>{cb(null, new Date().toISOString().replace(/:/g, '-')+ file.originalname)}
 const storage = multer.diskStorage({destination, filename})
 const upload = multer({storage: storage})
 
