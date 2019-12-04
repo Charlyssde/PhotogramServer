@@ -71,20 +71,14 @@ router.post('/img/new', upload.single('newImage'), async (req, res)=>{
      * Validación de los parámetros obligatorios
      */
 
-     if(!username || !fecha){
-         res.status(400).json({
-             'mensaje' : 'Parámetros incompletos',
-             'error' : err
-         })
-         return 
-     }
+     
 
      /**
       * Creación del nuevo Objeto Imagen
       */
      var img = new Imagen({
-         username: username,
-         fecha: fecha,
+         username: "Aline",
+        //  fecha: fecha,
          path: req.file.path
      })
 
