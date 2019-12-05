@@ -1,35 +1,19 @@
 {
-  "name": "photogramserver",
+  "name": "desap",
   "version": "1.0.0",
   "description": "",
   "main": "src/app.js",
   "scripts": {
-    "test": "mocha test/crud_usuario_test.js",
-    "start": "nodemon src/app.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Charlyssde/PhotogramServer.git"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/app.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.0",
-    "chai": "^4.2.0",
-    "chai-http": "^4.3.0",
-    "dotenv": "^8.2.0",
+    "dotenv": "^8.1.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
-    "mongodb": "^3.3.3",
-    "mongoose": "^5.7.7",
-    "multer": "^1.4.2",
-    "nodemon": "^1.19.4"
-  },
-  "bugs": {
-    "url": "https://github.com/Charlyssde/PhotogramServer/issues"
-  },
-  "homepage": "https://github.com/Charlyssde/PhotogramServer#readme",
-  "devDependencies": {
-    "mocha": "^6.2.2"
+    "mongoose": "^5.7.1"
   }
 }

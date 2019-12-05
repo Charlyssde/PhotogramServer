@@ -15,34 +15,7 @@ var UsuarioSchema = new Schema({
         required: true,
         type: String
     },
-    nombre: {
-        required: true,
-        type: String
-    },
-    apellidoPaterno:{
-        required: true,
-        type: String
-    },
-    apellidoMaterno:{
-        required: true,
-        type: String
-    },
-    correo: {
-        required: true,
-        type: String
-    },
-    estadoCuenta: {
-        required: true,
-        type: String
-    },
-    estado:{
-        required: false,
-        type: String
-    },
-    amigos:{
-        required: false,
-        type: Array
-    }
+    
 
 })
 
