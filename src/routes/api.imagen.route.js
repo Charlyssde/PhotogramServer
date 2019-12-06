@@ -167,8 +167,8 @@ router.post('/img/prueba', upload.single('image'), (req, res, next)=>{
     }
 
    var username = req.body.username;
-   let fecha = new Date();
-   let path ='./imgs/' + username + '_' + new Date().getTime().toString() + '.jpg'
+   var fecha = new Date();
+   var path ='./imgs/' + username + '_' + new Date().getTime().toString() + '.jpg'
 
     /**
      * Creación del nuevo Objeto Imagen
