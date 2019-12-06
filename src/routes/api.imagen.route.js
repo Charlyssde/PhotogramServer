@@ -176,7 +176,7 @@ router.post('/img/prueba', upload.single('image'), (req, res, next)=>{
     if(!username || !fecha){
         res.status(400).json({
             'mensaje' : 'Parámetros incompletos',
-            'error' : err
+            'error' : req.body
         })
         return 
     }
