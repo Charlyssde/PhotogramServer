@@ -170,7 +170,6 @@ router.post('/img/prueba', upload.single('image'), (req, res, next)=>{
 
    var username = req.body.username;
    var fecha = new Date();
-   var path ='./imgs/' + username + '_' + new Date().getTime().toString() + '.jpg'
 
     /**
      * Creación del nuevo Objeto Imagen
@@ -178,11 +177,11 @@ router.post('/img/prueba', upload.single('image'), (req, res, next)=>{
     var img = new Imagen({
         username: username,
         fecha: fecha,
-        path: path
+        path: './imgs/' + username + '_' + new Date().getTime().toString() + '.jpg'
     })
     
     let desc = req.body.descripcion
-    fs.writeFile(path, new Buffer(req.body.image, "base64"), err=>{
+    fs.writeFile('./imgs/' + username + '_' + new Date().getTime().toString() + '.jpg', new Buffer(req.body.image, "base64"), err=>{
         if(err) res.send('error')
         img.save(function (err, doc){
             if(err){
