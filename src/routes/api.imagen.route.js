@@ -162,7 +162,7 @@ router.post('/img/prueba', upload.single('image'), (req, res, next)=>{
     if(!req.body.image){
         res.status(400).json({
             'message' : 'Error en los parámetros. No hay ningún archivo.',
-            'req' : res.body,
+            'req' : req.body,
         })
     }
 
