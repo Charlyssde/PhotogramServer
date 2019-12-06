@@ -4,6 +4,7 @@ const config = require("../config");
 const apiRoute = require('./routes/api.route');
 const apiUsuarioRoute = require('./routes/api.usuario.route');
 const apiImagenRoute = require('./routes/api.imagen.route');
+const apiCommentReactionRoute = require('./routes/api.comentario_reaccion')
 const apiModeradorRoute = require('./routes/api.moderador.route');
 const bodyParser = require("body-parser");
 
@@ -11,6 +12,7 @@ app.use(bodyParser.json({limit: '10mb'}));
 app.use("/api", apiRoute);
 app.use('/api', apiUsuarioRoute);
 app.use('/api', apiImagenRoute);
+app.use('/api', apiCommentReactionRoute)
 app.use('/api', apiModeradorRoute);
 
 /**

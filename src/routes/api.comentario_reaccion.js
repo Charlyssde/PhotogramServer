@@ -1,22 +1,23 @@
 const express = require('express')
 const router = express.Router()
+const Imagen = require('../dataaccess/model/Imagen')
 const Comentario = require('../dataaccess/model/Comentario')
-const Reaccion = require('../dataaccess/model/Reaccion')
 
 /**
  * Crear un nuevo Comentario
  * @params los campos requeridos de Comentario
  */
-router.post('/comment/new', (req, res)=>{
+router.post('/comment', (req, res)=>{
     let username = req.body.username
-    let fecha = new Date;
     let contenido = req.body.contenido
+    let img_id = req.body.img_id
+    let fecha = new Date()
 
     //Validación de los parámetros del body
-    if(!username || !contenido){
+    if(!username || !contenido || !img_id){
         res.status(400).json({
             'mensaje' : 'Parámetros incompletos y/o inválidos',
-            'error' : err
+            'error' : req.body,
         })
         return
     }
@@ -27,15 +28,20 @@ router.post('/comment/new', (req, res)=>{
         contenido: contenido
     })
 
-    comentario.save(function(err, doc){
+    Imagen.updateOne({_id : img_id}, {$push: { comentarios: comentario} }, (err, res) =>{
         if(err){
             res.status(500).json({
-                'mensaje': 'Error al guardar el comentario',
-                'error': err
+                'message' : 'Hubo un erro al guardar el comentario',
+                'error' : err.body
             })
             return
         }
-        res.json(doc)
+        
+    })
+
+    res.status(200).json({
+        'message' : 'Comentario guardado.',
+        'res': res.body,
     })
 })
 
@@ -43,42 +49,31 @@ router.post('/comment/new', (req, res)=>{
   * Crear una nueva Reacción
   * @params los campos requeridos de una Reacción
   */
- router.post('/reaction/new', (req, res)=>{
-     let username = req.body.username;
-     let name = req.body.name;
-     let fecha = new Date();
+ router.post('/reaction', (req, res)=>{
+     let username = req.body.username
+     let img_id = req.body.img_id
 
-     if(!username || !name){
+     if(!username || !img_id){
          res.status(400).json({
-             'mensaje': 'Parámetros inválidos y/o incompletos'
+             'message' : 'Parámetros incompletos o inexistentes.',
+             'req' : req.body
          })
          return
      }
+     Imagen.updateOne({_id : img_id}, {$push: { reacciones: username} }, (err, res) =>{
+        if(err){
+            res.status(500).json({
+                'message' : 'Hubo un erro al guardar la reacción.',
+                'error' : err.body
+            })
+            return
+        }
+        
+    })
 
-     let reaccion = new Reaccion({
-         name: name,
-         username: username,
-         fecha: fecha
-     })
-
-     reaccion.save(function(err, doc){
-         if(err){
-             res.status(500).json({
-                 'mensaje': 'Error al guardad la reacción',
-                 'error': err
-             })
-             return
-         }
-         res.json(doc)
-     })
-
- })
-/**
- * Obtener todos los comentarios y reacciones de una Imagen
- * @params id de la Imagen 
- */
-
-
-
-
+    res.status(200).json({
+        'message' : 'Te gusta esto.',
+        'res': res.body,
+    })
+ }),
  module.exports = router
