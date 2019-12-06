@@ -19,19 +19,12 @@ var ImagenSchema = new Schema({
         required: false,
         type: Array,
     },
-<<<<<<< Updated upstream
     reacciones:{
         required:false,
         type: Array,
     },
     favorito:{
         required: false,
-=======
-    reaccion:{
-        required: false,
-        type: Array
-
->>>>>>> Stashed changes
     }
 });
 

@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const config = require("../config");
+const config = require("./config");
 const apiRoute = require('./routes/api.route');
 const apiImagenRoute = require('./routes/api.imagen.route');
 const apiCommentReactionRoute = require('./routes/api.comentario_reaccion')
@@ -9,7 +9,6 @@ const apiUsuario = require("./routes/api.usuario.route");
 const bodyParser = require("body-parser");
 const Admin = require("./dataaccess/model/Usuario");
 const jwt = require("jsonwebtoken");
-const config = require("./config");
 
 app.use(bodyParser.json({limit: '10mb'}));
 app.use("/api", apiRoute);

@@ -2,10 +2,11 @@ const express = require('express')
 const router = express.Router()
 
 const multer = require('multer')
-const destination = (req, file, cb)=>{cb(null, './imgs/')}
-const filename = (req, file, cb) =>{cb(null, new Date().toISOString().replace(/:/g, '-')+ file.originalname)}
-const storage = multer.diskStorage({destination, filename})
-const upload = multer({storage: storage})
+//const destination = (req, file, cb)=>{cb(null, './imgs/')}
+//const filename = (req, file, cb) =>{cb(null, new Date().toISOString().replace(/:/g, '-')+ file.originalname)}
+//const storage = multer.diskStorage({destination, filename})
+const upload = multer({dest: 'imgs/'})
+const fs = require('fs')
 
 const Imagen = require('../dataaccess/model/Imagen')
 
@@ -157,5 +158,60 @@ router.get('/img/getFeed', (req, res)=>{
     
 }),
 
+router.post('/img/prueba', upload.single('image'), (req, res, next)=>{
+    /**
+     * Validación de la existencia del archivo en la petición
+     */
+    if(!req.file){
+        res.status(400).json({
+            'message' : 'Error en los parámetros. No hay ningún archivo.',
+            'req' : res.body,
+        })
+    }
+
+   var username = req.body.username;
+   let fecha = new Date();
+   //var path = req.body.path //Verificar dónde se genera el path
+
+   /**
+    * Validación de los parámetros obligatorios
+    */
+
+    if(!username || !fecha){
+        res.status(400).json({
+            'mensaje' : 'Parámetros incompletos',
+            'error' : err
+        })
+        return 
+    }
+
+    /**
+     * Creación del nuevo Objeto Imagen
+     */
+    var img = new Imagen({
+        username: username,
+        fecha: fecha,
+        path: req.file.path
+    })
+
+    
+    let desc = req.body.descripcion
+    fs.writeFile(new Date().getTime().toString + '.jpg', new Buffer(req.body.image, "base64"), err=>{
+        if(err) res.send('error')
+        img.save( function (err, doc){
+            if(err){
+                res.status(500).json({
+                    'mensaje' : 'Hubo un error al subir la imagen',
+                    'error' : err
+                })
+                console.error(err)
+                return
+            }
+            res.json(doc)
+        })
+    })
+
+    res.send('exito')
+})
 
 module.exports = router
