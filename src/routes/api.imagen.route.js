@@ -159,9 +159,9 @@ router.post('/img/prueba', upload.single('image'), (req, res, next)=>{
     /**
      * Validación de la existencia del archivo en la petición
      */
-    if(!req.body.image){
+    if(!req.body.image || !req.username){
         res.status(400).json({
-            'message' : 'Error en los parámetros. No hay ningún archivo.',
+            'message' : 'Error en los parámetros de la petición',
             'req' : req.body,
         })
     }
@@ -169,17 +169,6 @@ router.post('/img/prueba', upload.single('image'), (req, res, next)=>{
    var username = req.body.username;
    let fecha = new Date();
    let path ='./imgs/' + username + '_' + new Date().getTime().toString + '.jpg'
-   /**
-    * Validación de los parámetros obligatorios
-    */
-
-    if(!username || !fecha){
-        res.status(400).json({
-            'mensaje' : 'Parámetros incompletos',
-            'error' : req.body
-        })
-        return 
-    }
 
     /**
      * Creación del nuevo Objeto Imagen
