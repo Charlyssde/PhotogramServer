@@ -5,7 +5,7 @@ const Usuario = require("../dataaccess/model/Usuario");
 /**
  * Obtener todos los usuarios
  */
-router.get("/getAllusers", (req, res) => {
+router.get("/user/all", (req, res) => {
     Usuario.find(function (err, docs) {
         if (err) {
             res.status(500).json({
@@ -23,7 +23,7 @@ router.get("/getAllusers", (req, res) => {
 /**
  * Obtener a un Usuario por su ID
  */
-router.get("/:id", (req, res) =>{
+router.get("/user/:id", (req, res) =>{
     var jsonId = req.params.id;
 
     Usuario.findById({
@@ -43,7 +43,7 @@ router.get("/:id", (req, res) =>{
 /**
  * Registrar un usuario nuevo y guardarlo en la BD
  */
-router.post('/registro', (req, res) => {
+router.post('/user', (req, res) => {
     
     var username = req.body.username
     var password = req.body.password
@@ -98,7 +98,7 @@ router.post('/registro', (req, res) => {
 /**
  * Actualización de los datos del usuario de acuerdo al identificador
  */
-router.put(`/update/:id`, (req, res) => {
+router.put(`/user/:id`, (req, res) => {
     var jsonId = req.params.id;
 
     var username = req.body.username

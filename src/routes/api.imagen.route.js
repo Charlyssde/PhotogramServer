@@ -213,7 +213,7 @@ router.post('/img/prueba', upload.single('image'), (req, res, next)=>{
 })
 
 router.delete("/img/:id", (req, res) => {
-    var img_id = req.params.img_id;
+    var img_id = req.params.id;
 
     /**
      * Función de eliminar
