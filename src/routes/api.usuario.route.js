@@ -60,8 +60,8 @@ router.post('/user', (req, res) => {
     if (!username || !password || !nombre || !apellidoPaterno || !apellidoMaterno
         || !correo) {
         res.status(400).json({
-            "request" : req.body,
-            "error" : "err"
+            'message': 'Error, parámetros incompletos o inválidos.',
+            'req' : req.body
         })
         return;
     }
@@ -77,8 +77,7 @@ router.post('/user', (req, res) => {
         apellidoMaterno: apellidoMaterno,
         correo: correo,
         estado: estado,
-        estadoCuenta: estadoCuenta,
-        //FotoPerfil?
+        estadoCuenta: estadoCuenta
     });
     /**
      * Función de registro 

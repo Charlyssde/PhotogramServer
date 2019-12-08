@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 //MONGODB_CONNECTION_STRING has the following format: `mongodb+srv://${user}:${password}@${server}/${database}`
 //Read the .env file for more information.
-process.env.NODE_ENV='test'
+//process.env.NODE_ENV='test'
 if(process.env.NODE_ENV === 'development'){
     const config = require('../config/default')
     mongoose.connect(config.MONGODB_CONNECTION_STRING, {
