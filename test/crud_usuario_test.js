@@ -25,7 +25,6 @@ beforeEach((done)=>{
 after(done => {
     console.log('\n\n-----------------------\n--\n-- END TEST\n--\n-------------------------');
     done();
-    return
 });
 
 /**
