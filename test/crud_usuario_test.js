@@ -1,10 +1,13 @@
+process.env.NODE_ENV='test'
+
+let mongoose = require('mongoose')
 let chai = require('chai');
 let chaiHttp = require('chai-http');
 let app = require('../src/app');
 let url = 'http://localhost:7777/api';
-let should = chai.should
-var mongoose = require('mongoose');
+let Usuario = require('../src/dataaccess/model/Usuario')
 
+let should = chai.should
 chai.should();
 chai.use(chaiHttp);
 
@@ -13,41 +16,47 @@ before(done => {
     console.log('\n\n-----------------------\n--\n-- START TEST\n--\n-------------------------');
     done();
 });
+beforeEach((done)=>{
+    Usuario.remove({}, err=>{
+        done()
+    })
+})
 
 after(done => {
     console.log('\n\n-----------------------\n--\n-- END TEST\n--\n-------------------------');
     done();
 });
 
-/* asyn test */
- describe('#Asynchronous user crud test', () =>{
-    var usuarios = [{
-        username: "Alinemhdez",
-        password: "secret",
-        nombre: "aline",
-        apellidos: "Hdez Fajardo",
-        correo: "alinemhdez@gmail.com",
-        estado: "Hola",
-        estadoCuenta: "true",
-        //fotoPerfil: "foto"
-    }]
-    it('agregar "usuario"', (done) => {
-        for(usuario in usuarios){
-            chai.request(url)
-            .post("/registro")
-            .send(usuarios[usuario])
-            .end((err,res)=>{
-                res.should.have.status(200);
-                console.log("Response Body:", res.body);
-            })
+/**
+ * TESTING USUARIO CRUD
+ */
+
+ //REGISTRAR USUARIO
+ describe('#Asynchronous Usuario CRUD test', () =>{
+    it('/POST Registrar usuario', (done) => {
+        var usuario = {
+            'username': "Alinemhdez",
+            'password': "secret",
+            'nombre': "aline",
+            'apellidoP': "Hernández",
+            'apellidoM': "Fajardo",
+            'correo': "alinemhdez@gmail.com",
+            'estado': "Hola",
+            'estadoCuenta': "true"
         }
-        done()
-        
+        chai.request(url)
+        .post("/registro")
+        .send(usuario)
+        .end((err,res)=>{
+            res.should.have.status(200)
+            console.log("Response Body:", res.body);
+        })
+        done()       
         });
 
 })
 
-
+//GET ALL USUARIOS
 describe('#Asynchronous user crud test', () => {
     it('obtener "usuarios" ', (done) => {
         chai.request(url)
@@ -70,7 +79,7 @@ describe('#Asynchronous user crud test', () => {
 });
 
 
-
+/*
 describe('Update el nombre del usuario con el username',()=>{
     it ("Should Update Partcular Usuario Only", (done)=>{
         var updatedUsuario = {
@@ -112,4 +121,4 @@ describe("Usuarios", function(){
         });
 
     });
-});
+});*/

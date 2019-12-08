@@ -4,6 +4,10 @@ const fs = require('fs')
 
 const multer = require('multer')
 const upload = multer({dest: 'imgs/'})
+//const filename = (req, file, cb) =>{cb(null, new Date().toISOString().replace(/:/g, '-')+ file.originalname)}
+//const destination = (req, file, cb)=>{cb(null, './imgs/')}
+//const storage = multer.diskStorage({destination, filename})
+//const upload = multer({storage:storage})
 
 const Imagen = require('../dataaccess/model/Imagen')
 
@@ -158,6 +162,7 @@ router.get('/img/getFeed', (req, res)=>{
 router.post('/img/prueba', upload.single('image'), (req, res, next)=>{
     console.log(req.body.username)
     console.log(req.body.image)
+
     /**
      * Validación de la existencia del archivo en la petición
      */
@@ -170,6 +175,7 @@ router.post('/img/prueba', upload.single('image'), (req, res, next)=>{
 
    var username = req.body.username;
    var fecha = new Date();
+   
 
     /**
      * Creación del nuevo Objeto Imagen

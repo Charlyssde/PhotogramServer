@@ -1,14 +1,25 @@
 const mongoose = require("mongoose");
-
-const server= 'desarrollosuv-bp8su.mongodb.net'
-const port= '27017'
-const database= 'photogram_db'
-const user= 'rodrigoOP'
-const password= 'r91C98A98'
-mongoose.connect(`mongodb+srv://${user}:${password}@${server}/${database}`, {
+//MONGODB_CONNECTION_STRING has the following format: `mongodb+srv://${user}:${password}@${server}/${database}`
+//Read the .env file for more information.
+if(process.env.NODE_ENV === 'development'){
+    const config = require('../config/default')
+    mongoose.connect(config.MONGODB_CONNECTION_STRING, {
     useNewUrlParser : true,
     useUnifiedTopology : true,
     useCreateIndex : true,
-})
+    })
+    console.log('Default mode')
+}
+if(process.env.NODE_ENV === 'test'){
+    const config_test = require('../config/test')
+    mongoose.connect(config_test.MONGODB_TEST_CONNECTION_STRING, {
+    useNewUrlParser : true,
+    useUnifiedTopology : true,
+    useCreateIndex : true,
+    })
+    console.log('Test mode')
+}
+
+
 
 module.exports = mongoose;
