@@ -3,9 +3,6 @@ const router = express.Router()
 const fs = require('fs')
 
 const multer = require('multer')
-//const destination = (req, file, cb)=>{cb(null, './imgs/')}
-//const filename = (req, file, cb) =>{cb(null, new Date().toISOString().replace(/:/g, '-')+ file.originalname)}
-//const storage = multer.diskStorage({destination, filename})
 const upload = multer({dest: 'imgs/'})
 
 const Imagen = require('../dataaccess/model/Imagen')
@@ -159,31 +156,20 @@ router.get('/img/getFeed', (req, res)=>{
 }),
 
 router.post('/img/prueba', upload.single('image'), (req, res, next)=>{
+    console.log(req.body.username)
+    console.log(req.body.image)
     /**
      * Validación de la existencia del archivo en la petición
      */
-    if(!req.file){
+    if(!req.body.image || !req.body.username){
         res.status(400).json({
-            'message' : 'Error en los parámetros. No hay ningún archivo.',
-            'req' : res.body,
+            'message' : 'Error en los parámetros de la petición',
+            'req' : req.body,
         })
     }
 
    var username = req.body.username;
-   let fecha = new Date();
-   //var path = req.body.path //Verificar dónde se genera el path
-
-   /**
-    * Validación de los parámetros obligatorios
-    */
-
-    if(!username || !fecha){
-        res.status(400).json({
-            'mensaje' : 'Parámetros incompletos',
-            'error' : err
-        })
-        return 
-    }
+   var fecha = new Date();
 
     /**
      * Creación del nuevo Objeto Imagen
@@ -191,14 +177,13 @@ router.post('/img/prueba', upload.single('image'), (req, res, next)=>{
     var img = new Imagen({
         username: username,
         fecha: fecha,
-        path: req.file.path
+        path: './imgs/' + username + '_' + new Date().getTime().toString() + '.jpg'
     })
-
     
     let desc = req.body.descripcion
-    fs.writeFile(new Date().getTime().toString + '.jpg', new Buffer(req.body.image, "base64"), err=>{
+    fs.writeFile('./imgs/' + username + '_' + new Date().getTime().toString() + '.jpg', new Buffer(req.body.image, "base64"), err=>{
         if(err) res.send('error')
-        img.save( function (err, doc){
+        img.save(function (err, doc){
             if(err){
                 res.status(500).json({
                     'mensaje' : 'Hubo un error al subir la imagen',
@@ -207,7 +192,7 @@ router.post('/img/prueba', upload.single('image'), (req, res, next)=>{
                 console.error(err)
                 return
             }
-            res.json(doc)
+            console.log(doc)
         })
     })
 

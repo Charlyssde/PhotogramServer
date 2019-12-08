@@ -53,7 +53,8 @@ router.post("/loginModerador", (req, res) => {
             })
 
             res.json({
-                token: token
+                token: token,
+                'username' : username
             })
 
         } else {
@@ -113,7 +114,8 @@ router.post("/login", (req, res) => {
             })
 
             res.json({
-                token: token
+                token: token,
+                'username' : username
             })
 
         } else {
