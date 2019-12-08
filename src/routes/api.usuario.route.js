@@ -110,8 +110,6 @@ router.put(`/update/:id`, (req, res) => {
     var estado = req.body.estado
     var estadoCuenta = req.body.estadoCuenta
     var amigos = req.body.amigos
-    //var fotoPerfil = req.body.fotoPerfil
-
     /**
      * Verificación de los parámetros
      */

@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Moderador =  require("../dataaccess/model/Moderador");
+const Usuario = require('../dataaccess/model/Usuario')
 
 /**
  * Obtener la lista de moderadores
@@ -59,5 +60,28 @@ router.post("/", (req, res) => {
         res.json(doc);
     });
 });
+
+router.put('/mod/:username', (req, res)=>{
+    if(!req.params.username){
+        res.status(400).json({
+            'message':'Error, parámetros incompletos o inválidos.',
+            'req': req.params
+        })
+    }
+    Usuario.findOneAndUpdate({username : req.params.username},
+        {$set:{
+            estadoCuenta : 1
+        },
+    },(err, docs)=>{
+        if(err){
+            res.status(500).json({
+                'message': 'Hubo un error al suspender la cuenta',
+                'error': err
+            })
+            return
+        }
+        res.json(docs)
+    })
+})
 
 module.exports = router;

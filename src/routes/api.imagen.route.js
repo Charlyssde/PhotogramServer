@@ -16,12 +16,12 @@ const Imagen = require('../dataaccess/model/Imagen')
 /**
  * Obtener todas las fotos en la BD. (No será usada por el Cliente)
  */
-router.get('/img/getAllImages', (req, res) =>{
+router.get('/img/all', (req, res) =>{
     Imagen.find(function (err, docs){
         if(err){
             res.status(500).json({
                 "mensaje" : "Hubo un error al ejecutar la consulta",
-                "error" : err
+                'error' : err
             })
             console.error(err)
             return
@@ -33,7 +33,7 @@ router.get('/img/getAllImages', (req, res) =>{
 /**
  * Obtener una foto por ID de la Imagen
  */
-router.get('/img/getImg/:id', (req, res) =>{
+router.get('/img/:id', (req, res) =>{
     let jsonId = req.params.id
 
     Imagen.findById({ _id:jsonId}, function(err, docs){
@@ -107,7 +107,7 @@ router.post('/img/new', upload.single('newImage'), async (req, res)=>{
  * Recuperar todos los objetos Imagen de un Usuario en específico
  * @params El username del Usuario que emite la petición.rs
  */
-router.get('/img/getImgsUser/:username', (req, res)=>{
+router.get('/img/:username', (req, res)=>{
     let username = req.params.username;
 
     if(!username){
@@ -212,5 +212,28 @@ router.post('/img/prueba', upload.single('image'), (req, res, next)=>{
     res.send('exito')
 })
 
+router.delete("/img/:id", (req, res) => {
+    var img_id = req.params.img_id;
+
+    /**
+     * Función de eliminar
+     * Regresa 500 si hay un error
+     * Regresa 200 si fue exitoso.
+     */
+    //FALTA ELIMINAR EL ARCHIVO DEL SERVER
+    
+    Imagen.findOneAndDelete({
+        _id: img_id
+    }, function (err, doc){
+        if (err) {
+            res.status(500).json({
+                'message': "Error al eliminar la foto",
+                'error' : err
+            })
+            return;
+        }
+        res.json(doc);
+    });
+});
 
 module.exports = router
