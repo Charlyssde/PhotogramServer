@@ -2,10 +2,11 @@ syntax = "proto2";
 import "google/protobuf/timestamp.proto";
 
 message Mensaje {
-	required string idMensaje = 1;
+	optional string idMensaje = 1;
 	required Usuario remitente =2;
 	required google.protobuf.Timestamp fechaEnvio = 3;
 	required string contenido = 4;
+	required string idConversacion = 5;
 	extensions 77 to 78;
 }
 
@@ -13,13 +14,8 @@ message Archivo {
 	extend Mensaje {
 		optional Archivo archivo = 77;
 	}
-<<<<<<< Updated upstream
-	required bytes contenido = 2;
-	required string ruta = 3;
-=======
-	bytes contenido = 1;
-	string ruta = 2;
->>>>>>> Stashed changes
+	optional bytes contenido = 1;
+	optional string ruta = 2;
 }
 
 message Texto {
@@ -32,12 +28,10 @@ message Texto {
 
 message Usuario {
 	required string username = 1;
-	required string idUsuario = 2;
-		
 }
 
 message Conversacion{
-	required string key = 1;
+	optional string key = 1;
 	repeated Usuario usuarios = 2;
 	repeated Mensaje mensajes = 3;
 }
@@ -45,9 +39,9 @@ message Conversacion{
 message Empty{}
 
 service Chat {
-	rpc iniciarConversacion(Conversacion) returns (Conversacion);
-	rpc recibirMensajes(Empty) returns (Conversacion);
-	rpc enviarMensaje(Conversacion) returns (Empty);
+	rpc iniciarConversacion(Conversacion) returns (Empty);
+	rpc recibirMensajes(Empty) returns (stream Mensaje);
+	rpc enviarMensaje(stream Mensaje) returns (Empty);
 }
 	
 	

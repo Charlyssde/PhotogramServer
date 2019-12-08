@@ -1,22 +1,31 @@
+import mysql.connector
 import grpc
 import Chat_pb2 as structure
 import Chat_pb2_grpc as str_grpc
 from concurrent import futures
-
 import time
+
+cnx = mysql.connector.connect(user='root', password='2580',host='localhost',database='photogram')
 
 class ChatServer(str_grpc.ChatServicer):
     def __init__(self, *args, **kwargs):
         self.conversaciones = list()
         #cargar las conversaciones desde la bd o registro
+        self.usuarios = list()
+        
     def iniciarConversacion(self, request, context):
         for conv in self.conversaciones:
-            if request.key == conv.key:
+            if request.key in str(conv[0] + conv[1]):
                 return conv
-            
-        nuevaConv = request
-        self.conversaciones.append(nuevaConv)
-        return nuevaConv
+            else:
+                print("false")
+                u1 = request.usuarios[0]
+                u2 = request.usuarios[1]
+                cursor = cnx.cursor()
+                cursor.execute("INSERT INTO photogram.conversacion ({},{})"(u1, u2))
+                nuevaConv = request
+                self.conversaciones.append(nuevaConv)
+                return nuevaConv
 
     def recibirMensajes(self, request, context):
         while True:

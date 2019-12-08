@@ -10,13 +10,14 @@ def main():
     channel = grpc.insecure_channel(host + ':' + str(port))
 
     stub = str_grpc.ChatStub(channel)
-    user = structure.Usuario(username = "user1", idUsuario = "1")
-    user2 = structure.Usuario(username = "user2", idUsuario = "2")
+    user = structure.Usuario(username = "Charly")
+    user2 = structure.Usuario(username = "Charlyssde")
     listaU = list()
     listaU.append(user)
     listaU.append(user2)
     listaM = list()
-    conv = structure.Conversacion(key = "1", usuarios = listaU, mensajes = listaM)
+    key = user.username + user2.username
+    conv = structure.Conversacion(key = key , usuarios = listaU, mensajes = listaM)
     response = stub.iniciarConversacion(conv)
 
 
