@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const config = require("../config");
+const config = require("./config/default");
 const apiRoute = require('./routes/api.route');
 const apiUsuarioRoute = require('./routes/api.usuario.route');
 const apiImagenRoute = require('./routes/api.imagen.route');

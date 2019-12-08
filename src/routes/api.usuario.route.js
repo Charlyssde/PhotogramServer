@@ -53,7 +53,6 @@ router.post('/registro', (req, res) => {
     var correo = req.body.correo
     var estado = req.body.estado
     var estadoCuenta = req.body.estadoCuenta
-    //var fotoPerfil = req.body.fotoPerfil
 
     /**
      * Validación de los parámetros obligatorios
@@ -92,7 +91,7 @@ router.post('/registro', (req, res) => {
             console.error(err);
             return;
         }
-        res.json(doc);
+        res.status(200).json(doc);
     });
 });
 
