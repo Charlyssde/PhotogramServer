@@ -23,6 +23,19 @@ const usuario = {
     estadoCuenta: 0
 }
 
+const objeto_usuario = new Usuario({
+    username: "rodrigo",
+    password: "123",
+    nombre: "Rodrigo",
+    apellidoP: "Ordóñez",
+    apellidoM: "Pacheco",
+    correo: "rodrigo.op1791@gmail.com",
+    estado: "Hola, soy Rodrigo",
+    estadoCuenta: 0
+})
+
+
+
 const usuario_incompleto = {
     'username': "Alinemhdez",
     'password': "secret",
@@ -32,13 +45,12 @@ const usuario_incompleto = {
     'estadoCuenta': 0
 }
 
-before(done => {
-    //usuario_1.save()
+before((done) => {
     console.log('\n\n-----------------------\n--\n-- START TEST\n--\n-------------------------');
     done();
 });
 
-after(done => {
+after((done) => {
     console.log('\n\n-----------------------\n--\n-- END TEST\n--\n-------------------------');
     done();
 });
@@ -46,16 +58,18 @@ after(done => {
 /**
  * TESTING USUARIO CRUD
  */
-
-
  //REGISTRAR USUARIO
  describe('/POST Usuario(async)', () =>{
-    it('it should post Usuario with full fields', (done) => { 
+   
+    beforeEach((done)=>{
+        Usuario.deleteOne({username: 'Alinemhdez'}, (err)=>{done()})
+     });
+
+    it('it should post Usuario with full fields', done => { 
         chai.request(app)
         .post("/api/user")
         .send(usuario)
         .end((err,res)=>{
-            console.log(res)
             res.should.have.status(200)
             res.body.should.have.property('_id')
             res.body.should.have.property('username')
@@ -65,39 +79,38 @@ after(done => {
             res.body.should.have.property('apellidoMaterno')
             res.body.should.have.property('correo')
             res.body.should.have.property('estado')
-            res.body.should.have.property('estadoCuenta')  
+            res.body.should.have.property('estadoCuenta')
+        done()    
         })
-        done()       
-        });
-    it('it should NOT POST Usuario with incomplete fields', (done)=>{
+             
+    });
+    it('it should NOT POST Usuario with incomplete fields', done=>{
         chai.request(app)
-            .post('/user')
+            .post('/api/user')
             .send(usuario_incompleto)
             .end((err, res)=>{
                 res.should.have.status(404)
-                console.log('Response body: ' , res.body)
-            })
-        done()    
+            done()
+            })    
     })
 
 })
 
 //GET ALL USUARIOS
 describe('/GET Usuarios', () => {
-    it('it should get all Usuarios', (done) => {
+    it('it should get all Usuarios', done => {
         chai.request(app)
-            .get("/user/all")
+            .get("/api/user/all")
             .end(function (err, res) {
                 if(err) done(err);
                 res.should.have.status(200)
-                console.log('Salida: %s, users: %s',res.statusCode, res.body.length)
+            done() 
             });
-    done()
-    }),
-    it('it should get only the specified Usuario', (done)=>{
+    });
+    it('it should only get the specified Usuario', done=>{
+        const id = "5dedffc661e74f262828e24c"
         chai.request(app)
-            .get('/user/' + usuario.id)
-            .send(usuario)
+            .get(`api/user/${id}`)
             .end((err,res)=>{
                 res.should.have.status(200)
                 res.body.should.have.property('_id')
@@ -108,8 +121,9 @@ describe('/GET Usuarios', () => {
                 res.body.should.have.property('apellidoMaterno')
                 res.body.should.have.property('correo')
                 res.body.should.have.property('estado')
-                res.body.should.have.property('estadoCuenta')               
+                res.body.should.have.property('estadoCuenta') 
+            done()
             })
-    done()
+            done()
     })
 })

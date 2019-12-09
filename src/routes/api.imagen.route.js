@@ -177,7 +177,7 @@ router.post('/img/prueba', upload.single('image'), (req, res, next)=>{
     }
 
    var username = req.body.username;
-   var fecha = new Date();
+   var fecha = new Date().getTime().toString();
    
 
     /**

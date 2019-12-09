@@ -13,7 +13,7 @@ var ImagenSchema = new Schema({
     },
     fecha:{
         required: true,
-        type: Date
+        type: String
     },
     comentarios:{
         required: false,

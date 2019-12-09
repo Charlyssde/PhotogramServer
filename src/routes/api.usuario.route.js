@@ -59,7 +59,7 @@ router.post('/user', (req, res) => {
      */
     if (!username || !password || !nombre || !apellidoPaterno || !apellidoMaterno
         || !correo) {
-        res.status(400).json({
+        res.status(404).json({
             message: 'Error, parámetros incompletos o inválidos.',
             req : req.body
         })
