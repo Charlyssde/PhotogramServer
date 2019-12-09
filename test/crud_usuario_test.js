@@ -127,3 +127,17 @@ describe('/GET Usuarios', () => {
             done()
     })
 })
+
+describe('/POST Imagen', ()=>{
+    it('should create a new Imagen object and file under /imgs', done =>{
+        let imagen = { username: 'rodrigo', image: 'IMAGEN_PRUEBA_A_STRING'}
+        chai.request(app)
+        .post('/api/img/prueba')
+        .send(imagen)
+        .end((err, res)=>{
+            res.should.have.status(200)
+            done()
+        })
+    })
+})
+
