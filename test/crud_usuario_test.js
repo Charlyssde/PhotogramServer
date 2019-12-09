@@ -59,7 +59,7 @@ after((done) => {
  * TESTING USUARIO CRUD
  */
  //REGISTRAR USUARIO
- describe('/POST Usuario(async)', () =>{
+ describe('/POST Usuario(async)', (done) =>{
    
     beforeEach((done)=>{
         Usuario.deleteOne({username: 'Alinemhdez'}, (err)=>{done()})
@@ -93,7 +93,6 @@ after((done) => {
             done()
             })    
     })
-
 })
 
 //GET ALL USUARIOS
@@ -113,15 +112,6 @@ describe('/GET Usuarios', () => {
             .get(`api/user/${id}`)
             .end((err,res)=>{
                 res.should.have.status(200)
-                res.body.should.have.property('_id')
-                res.body.should.have.property('username')
-                res.body.should.have.property('password')
-                res.body.should.have.property('nombre')
-                res.body.should.have.property('apellidoPaterno')
-                res.body.should.have.property('apellidoMaterno')
-                res.body.should.have.property('correo')
-                res.body.should.have.property('estado')
-                res.body.should.have.property('estadoCuenta') 
             done()
             })
             done()
