@@ -188,7 +188,7 @@ router.post('/img/prueba', upload.single('image'), (req, res, next)=>{
         username: username,
         fecha: fecha,
         //Creé desde aquí el path
-        path: './imgs/' + username + '_' + new Date().getTime().toString() + '.jpg'
+        path: './imgs/' + username + '_' + fecha + '.jpg'
     })
     
     let desc = req.body.descripcion

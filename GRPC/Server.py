@@ -9,7 +9,6 @@ cnx = mysql.connector.connect(user='root', password='2580',host='localhost',data
 
 class ChatServer(str_grpc.ChatServicer):
     def __init__(self, *args, **kwargs):
-        self.conversaciones = list()
         #cargar las conversaciones desde la bd o registro
         self.usuarios = list()
         
@@ -21,14 +20,13 @@ class ChatServer(str_grpc.ChatServicer):
                 print("false")
                 u1 = request.usuarios[0]
                 u2 = request.usuarios[1]
-                cursor = cnx.cursor()
-                cursor.execute("INSERT INTO photogram.conversacion ({},{})"(u1, u2))
                 nuevaConv = request
                 self.conversaciones.append(nuevaConv)
                 return nuevaConv
 
     def recibirMensajes(self, request, context):
         while True:
+            
             print()
     
     def enviarMensaje(self, request_iterator, context):
