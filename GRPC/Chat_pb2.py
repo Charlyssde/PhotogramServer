@@ -12,7 +12,6 @@ from google.protobuf import symbol_database as _symbol_database
 _sym_db = _symbol_database.Default()
 
 
-from google.protobuf import timestamp_pb2 as google_dot_protobuf_dot_timestamp__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
@@ -20,9 +19,8 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto2',
   serialized_options=None,
-  serialized_pb=_b('\n\nChat.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x9a\x01\n\x07Mensaje\x12\x11\n\tidMensaje\x18\x01 \x01(\t\x12\x1b\n\tremitente\x18\x02 \x02(\x0b\x32\x08.Usuario\x12.\n\nfechaEnvio\x18\x03 \x02(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x11\n\tcontenido\x18\x04 \x02(\t\x12\x16\n\x0eidConversacion\x18\x05 \x02(\t*\x04\x08M\x10O\"O\n\x07\x41rchivo\x12\x11\n\tcontenido\x18\x01 \x01(\x0c\x12\x0c\n\x04ruta\x18\x02 \x01(\t2#\n\x07\x61rchivo\x12\x08.Mensaje\x18M \x01(\x0b\x32\x08.Archivo\"L\n\x05Texto\x12\x11\n\tcontenido\x18\x01 \x02(\t\x12\x0f\n\x07\x65\x64itado\x18\x02 \x02(\x08\x32\x1f\n\x05texto\x12\x08.Mensaje\x18N \x01(\x0b\x32\x06.Texto\"\x1b\n\x07Usuario\x12\x10\n\x08username\x18\x01 \x02(\t\"S\n\x0c\x43onversacion\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x1a\n\x08usuarios\x18\x02 \x03(\x0b\x32\x08.Usuario\x12\x1a\n\x08mensajes\x18\x03 \x03(\x0b\x32\x08.Mensaje\"\x07\n\x05\x45mpty2\x80\x01\n\x04\x43hat\x12,\n\x13iniciarConversacion\x12\r.Conversacion\x1a\x06.Empty\x12%\n\x0frecibirMensajes\x12\x06.Empty\x1a\x08.Mensaje0\x01\x12#\n\renviarMensaje\x12\x08.Mensaje\x1a\x06.Empty(\x01')
-  ,
-  dependencies=[google_dot_protobuf_dot_timestamp__pb2.DESCRIPTOR,])
+  serialized_pb=_b('\n\nChat.proto\"b\n\x07Mensaje\x12\n\n\x02id\x18\x01 \x01(\t\x12\x18\n\x06sender\x18\x02 \x02(\x0b\x32\x08.Usuario\x12\x0f\n\x07\x63ontent\x18\x03 \x02(\t\x12\x1a\n\x08receiver\x18\x04 \x02(\x0b\x32\x08.Usuario*\x04\x08M\x10O\"O\n\x07\x41rchivo\x12\x11\n\tcontenido\x18\x01 \x01(\x0c\x12\x0c\n\x04ruta\x18\x02 \x01(\t2#\n\x07\x61rchivo\x12\x08.Mensaje\x18M \x01(\x0b\x32\x08.Archivo\"L\n\x05Texto\x12\x11\n\tcontenido\x18\x01 \x02(\t\x12\x0f\n\x07\x65\x64itado\x18\x02 \x02(\x08\x32\x1f\n\x05texto\x12\x08.Mensaje\x18N \x01(\x0b\x32\x06.Texto\"\x1b\n\x07Usuario\x12\x10\n\x08username\x18\x01 \x02(\t\"\x19\n\x05\x45mpty\x12\x10\n\x08response\x18\x01 \x02(\t2R\n\x04\x43hat\x12\'\n\x0frecibirMensajes\x12\x08.Usuario\x1a\x08.Mensaje0\x01\x12!\n\renviarMensaje\x12\x08.Mensaje\x1a\x06.Empty')
+)
 
 
 
@@ -35,37 +33,30 @@ _MENSAJE = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='idMensaje', full_name='Mensaje.idMensaje', index=0,
+      name='id', full_name='Mensaje.id', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='remitente', full_name='Mensaje.remitente', index=1,
+      name='sender', full_name='Mensaje.sender', index=1,
       number=2, type=11, cpp_type=10, label=2,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='fechaEnvio', full_name='Mensaje.fechaEnvio', index=2,
-      number=3, type=11, cpp_type=10, label=2,
+      name='content', full_name='Mensaje.content', index=2,
+      number=3, type=9, cpp_type=9, label=2,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='receiver', full_name='Mensaje.receiver', index=3,
+      number=4, type=11, cpp_type=10, label=2,
       has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='contenido', full_name='Mensaje.contenido', index=3,
-      number=4, type=9, cpp_type=9, label=2,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='idConversacion', full_name='Mensaje.idConversacion', index=4,
-      number=5, type=9, cpp_type=9, label=2,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
@@ -81,8 +72,8 @@ _MENSAJE = _descriptor.Descriptor(
   extension_ranges=[(77, 79), ],
   oneofs=[
   ],
-  serialized_start=48,
-  serialized_end=202,
+  serialized_start=14,
+  serialized_end=112,
 )
 
 
@@ -126,8 +117,8 @@ _ARCHIVO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=204,
-  serialized_end=283,
+  serialized_start=114,
+  serialized_end=193,
 )
 
 
@@ -171,8 +162,8 @@ _TEXTO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=285,
-  serialized_end=361,
+  serialized_start=195,
+  serialized_end=271,
 )
 
 
@@ -202,53 +193,8 @@ _USUARIO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=363,
-  serialized_end=390,
-)
-
-
-_CONVERSACION = _descriptor.Descriptor(
-  name='Conversacion',
-  full_name='Conversacion',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='key', full_name='Conversacion.key', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='usuarios', full_name='Conversacion.usuarios', index=1,
-      number=2, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='mensajes', full_name='Conversacion.mensajes', index=2,
-      number=3, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=392,
-  serialized_end=475,
+  serialized_start=273,
+  serialized_end=300,
 )
 
 
@@ -259,6 +205,13 @@ _EMPTY = _descriptor.Descriptor(
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
+    _descriptor.FieldDescriptor(
+      name='response', full_name='Empty.response', index=0,
+      number=1, type=9, cpp_type=9, label=2,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -271,19 +224,16 @@ _EMPTY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=477,
-  serialized_end=484,
+  serialized_start=302,
+  serialized_end=327,
 )
 
-_MENSAJE.fields_by_name['remitente'].message_type = _USUARIO
-_MENSAJE.fields_by_name['fechaEnvio'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
-_CONVERSACION.fields_by_name['usuarios'].message_type = _USUARIO
-_CONVERSACION.fields_by_name['mensajes'].message_type = _MENSAJE
+_MENSAJE.fields_by_name['sender'].message_type = _USUARIO
+_MENSAJE.fields_by_name['receiver'].message_type = _USUARIO
 DESCRIPTOR.message_types_by_name['Mensaje'] = _MENSAJE
 DESCRIPTOR.message_types_by_name['Archivo'] = _ARCHIVO
 DESCRIPTOR.message_types_by_name['Texto'] = _TEXTO
 DESCRIPTOR.message_types_by_name['Usuario'] = _USUARIO
-DESCRIPTOR.message_types_by_name['Conversacion'] = _CONVERSACION
 DESCRIPTOR.message_types_by_name['Empty'] = _EMPTY
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -315,13 +265,6 @@ Usuario = _reflection.GeneratedProtocolMessageType('Usuario', (_message.Message,
   ))
 _sym_db.RegisterMessage(Usuario)
 
-Conversacion = _reflection.GeneratedProtocolMessageType('Conversacion', (_message.Message,), dict(
-  DESCRIPTOR = _CONVERSACION,
-  __module__ = 'Chat_pb2'
-  # @@protoc_insertion_point(class_scope:Conversacion)
-  ))
-_sym_db.RegisterMessage(Conversacion)
-
 Empty = _reflection.GeneratedProtocolMessageType('Empty', (_message.Message,), dict(
   DESCRIPTOR = _EMPTY,
   __module__ = 'Chat_pb2'
@@ -341,31 +284,22 @@ _CHAT = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=487,
-  serialized_end=615,
+  serialized_start=329,
+  serialized_end=411,
   methods=[
-  _descriptor.MethodDescriptor(
-    name='iniciarConversacion',
-    full_name='Chat.iniciarConversacion',
-    index=0,
-    containing_service=None,
-    input_type=_CONVERSACION,
-    output_type=_EMPTY,
-    serialized_options=None,
-  ),
   _descriptor.MethodDescriptor(
     name='recibirMensajes',
     full_name='Chat.recibirMensajes',
-    index=1,
+    index=0,
     containing_service=None,
-    input_type=_EMPTY,
+    input_type=_USUARIO,
     output_type=_MENSAJE,
     serialized_options=None,
   ),
   _descriptor.MethodDescriptor(
     name='enviarMensaje',
     full_name='Chat.enviarMensaje',
-    index=2,
+    index=1,
     containing_service=None,
     input_type=_MENSAJE,
     output_type=_EMPTY,

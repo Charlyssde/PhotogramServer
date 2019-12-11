@@ -11,47 +11,40 @@ class ChatServer(str_grpc.ChatServicer):
     def __init__(self, *args, **kwargs):
         #cargar las conversaciones desde la bd o registro
         self.usuarios = list()
-        
-    def iniciarConversacion(self, request, context):
-        for conv in self.conversaciones:
-            if request.key in str(conv[0] + conv[1]):
-                return conv
-            else:
-                print("false")
-                u1 = request.usuarios[0]
-                u2 = request.usuarios[1]
-                nuevaConv = request
-                self.conversaciones.append(nuevaConv)
-                return nuevaConv
+        self.messages = list()
 
     def recibirMensajes(self, request, context):
+        cont = 0
         while True:
-            
-            print()
+            while cont < len(self.messages):
+                if request.username == self.messages[cont].receiver.username:
+                    yield self.messages[cont]
+                    cont = cont + 1
     
-    def enviarMensaje(self, request_iterator, context):
-        while True:
-            print()
+    def enviarMensaje(self, request, context):
+        self.messages.append(request)
+        print(self.messages)
+        return structure.Empty(response = "success")
 
 
 def main():
     port = '1337'
 
-    with open('serverchat.key', 'rb') as f:
-        private_key = f.read()
-    with open('serverchat.csr', 'rb') as f:
-        certificate_chain = f.read()
+    #with open('serverchat.key', 'rb') as f:
+    #    private_key = f.read()
+    #with open('serverchat.csr', 'rb') as f:
+    #    certificate_chain = f.read()
 
-    server_credentials = grpc.ssl_server_credentials(
-      ((private_key, certificate_chain,),))
+    #server_credentials = grpc.ssl_server_credentials(
+    #  ((private_key, certificate_chain,),))
 
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=100))
     str_grpc.add_ChatServicer_to_server(ChatServer(), server)
 
     print('Servidor iniciado')
-    server.add_insecure_port('localhost:' + str(port))
+    #server.add_insecure_port('localhost:' + str(port))
     #server.add_secure_port('[::]:'+port, server_credentials)
-
+    server.add_insecure_port('[::]:50051')
     server.start()
     
     try:
