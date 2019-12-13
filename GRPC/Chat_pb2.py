@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto2',
   serialized_options=None,
-  serialized_pb=_b('\n\nChat.proto\"b\n\x07Mensaje\x12\n\n\x02id\x18\x01 \x01(\t\x12\x18\n\x06sender\x18\x02 \x02(\x0b\x32\x08.Usuario\x12\x0f\n\x07\x63ontent\x18\x03 \x02(\t\x12\x1a\n\x08receiver\x18\x04 \x02(\x0b\x32\x08.Usuario*\x04\x08M\x10O\"O\n\x07\x41rchivo\x12\x11\n\tcontenido\x18\x01 \x01(\x0c\x12\x0c\n\x04ruta\x18\x02 \x01(\t2#\n\x07\x61rchivo\x12\x08.Mensaje\x18M \x01(\x0b\x32\x08.Archivo\"L\n\x05Texto\x12\x11\n\tcontenido\x18\x01 \x02(\t\x12\x0f\n\x07\x65\x64itado\x18\x02 \x02(\x08\x32\x1f\n\x05texto\x12\x08.Mensaje\x18N \x01(\x0b\x32\x06.Texto\"\x1b\n\x07Usuario\x12\x10\n\x08username\x18\x01 \x02(\t\"\x19\n\x05\x45mpty\x12\x10\n\x08response\x18\x01 \x02(\t2R\n\x04\x43hat\x12\'\n\x0frecibirMensajes\x12\x08.Usuario\x1a\x08.Mensaje0\x01\x12!\n\renviarMensaje\x12\x08.Mensaje\x1a\x06.Empty')
+  serialized_pb=_b('\n\nChat.proto\"N\n\x07Mensaje\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x0e\n\x06sender\x18\x02 \x02(\t\x12\x0f\n\x07\x63ontent\x18\x03 \x02(\t\x12\x10\n\x08receiver\x18\x04 \x02(\t*\x04\x08M\x10O\"O\n\x07\x41rchivo\x12\x11\n\tcontenido\x18\x01 \x01(\x0c\x12\x0c\n\x04ruta\x18\x02 \x01(\t2#\n\x07\x61rchivo\x12\x08.Mensaje\x18M \x01(\x0b\x32\x08.Archivo\"L\n\x05Texto\x12\x11\n\tcontenido\x18\x01 \x02(\t\x12\x0f\n\x07\x65\x64itado\x18\x02 \x02(\x08\x32\x1f\n\x05texto\x12\x08.Mensaje\x18N \x01(\x0b\x32\x06.Texto\"\x1b\n\x07Usuario\x12\x10\n\x08username\x18\x01 \x02(\t\"\x19\n\x05\x45mpty\x12\x10\n\x08response\x18\x01 \x02(\t2R\n\x04\x43hat\x12\'\n\x0frecibirMensajes\x12\x08.Usuario\x1a\x08.Mensaje0\x01\x12!\n\renviarMensaje\x12\x08.Mensaje\x1a\x06.Empty')
 )
 
 
@@ -34,15 +34,15 @@ _MENSAJE = _descriptor.Descriptor(
   fields=[
     _descriptor.FieldDescriptor(
       name='id', full_name='Mensaje.id', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='sender', full_name='Mensaje.sender', index=1,
-      number=2, type=11, cpp_type=10, label=2,
-      has_default_value=False, default_value=None,
+      number=2, type=9, cpp_type=9, label=2,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
@@ -55,8 +55,8 @@ _MENSAJE = _descriptor.Descriptor(
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='receiver', full_name='Mensaje.receiver', index=3,
-      number=4, type=11, cpp_type=10, label=2,
-      has_default_value=False, default_value=None,
+      number=4, type=9, cpp_type=9, label=2,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
@@ -73,7 +73,7 @@ _MENSAJE = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=14,
-  serialized_end=112,
+  serialized_end=92,
 )
 
 
@@ -117,8 +117,8 @@ _ARCHIVO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=114,
-  serialized_end=193,
+  serialized_start=94,
+  serialized_end=173,
 )
 
 
@@ -162,8 +162,8 @@ _TEXTO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=195,
-  serialized_end=271,
+  serialized_start=175,
+  serialized_end=251,
 )
 
 
@@ -193,8 +193,8 @@ _USUARIO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=273,
-  serialized_end=300,
+  serialized_start=253,
+  serialized_end=280,
 )
 
 
@@ -224,12 +224,10 @@ _EMPTY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=302,
-  serialized_end=327,
+  serialized_start=282,
+  serialized_end=307,
 )
 
-_MENSAJE.fields_by_name['sender'].message_type = _USUARIO
-_MENSAJE.fields_by_name['receiver'].message_type = _USUARIO
 DESCRIPTOR.message_types_by_name['Mensaje'] = _MENSAJE
 DESCRIPTOR.message_types_by_name['Archivo'] = _ARCHIVO
 DESCRIPTOR.message_types_by_name['Texto'] = _TEXTO
@@ -284,8 +282,8 @@ _CHAT = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=329,
-  serialized_end=411,
+  serialized_start=309,
+  serialized_end=391,
   methods=[
   _descriptor.MethodDescriptor(
     name='recibirMensajes',

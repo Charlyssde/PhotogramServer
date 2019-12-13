@@ -4,26 +4,50 @@ import Chat_pb2 as structure
 import Chat_pb2_grpc as str_grpc
 from concurrent import futures
 import time
+import datetime
 
 cnx = mysql.connector.connect(user='root', password='2580',host='localhost',database='photogram')
 
 class ChatServer(str_grpc.ChatServicer):
     def __init__(self, *args, **kwargs):
-        #cargar las conversaciones desde la bd o registro
         self.usuarios = list()
         self.messages = list()
+
+
+        #Se cargan los mensajes de la bd
+        cur = cnx.cursor()
+        cur.execute("SELECT * FROM photogram.mensaje")
+        for msj in cur.fetchall():
+            print(msj)
+            self.messages.append(msj)
 
     def recibirMensajes(self, request, context):
         cont = 0
         while True:
             while cont < len(self.messages):
-                if request.username == self.messages[cont].receiver.username:
-                    yield self.messages[cont]
+                message = structure.Mensaje(
+                    id = self.messages[cont][0], sender = self.messages[cont][1], receiver = self.messages[cont][2], content = self.messages[cont][3])
+                if request.username == message.receiver:
+                    yield message
                     cont = cont + 1
     
     def enviarMensaje(self, request, context):
-        self.messages.append(request)
-        print(self.messages)
+        cur = cnx.cursor()
+        sender = request.sender
+        receiver = request.receiver
+        contenido = request.content
+        date = datetime.datetime.now()
+        query = "INSERT INTO photogram.mensaje (sender, receiver, content, date) values (%s,%s,%s,%s)" 
+        values = (sender, receiver, contenido, date)
+        cur.execute(query, values)
+        cnx.commit()
+        #insertarlo en la bd
+        
+        self.messages.clear()
+        cur.execute("SELECT * FROM photogram.mensaje")
+        for msj in cur.fetchall():
+            print(msj)
+            self.messages.append(msj)
         return structure.Empty(response = "success")
 
 
