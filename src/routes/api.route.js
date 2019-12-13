@@ -66,7 +66,14 @@ router.post("/loginModerador", (req, res) => {
 
 });
 
-
+/**
+ * GET Petición para comprobar que el server esté vivo
+ */
+router.get('/alive', (req, res)=>{
+    res.status(200).json({
+        message: 'Estoy vivo...'
+    })
+})
 /*
     Petición post que realiza el login del usuario a través de su usuario y contraseña
 
