@@ -21,13 +21,13 @@ router.get("/user/all", (req, res) => {
 });
 
 /**
- * Obtener a un Usuario por su ID
+ * Obtener a un Usuario por su Username
  */
-router.get("/user/:id", (req, res) =>{
-    var jsonId = req.params.id;
+router.get("/user/:username", (req, res) =>{
+    var username = req.params.username;
 
-    Usuario.findById({
-        _id:jsonId}, 
+    Usuario.findOne({
+        username:username}, 
         function(err, docs){
         if(err){
             res.status(500).json({
