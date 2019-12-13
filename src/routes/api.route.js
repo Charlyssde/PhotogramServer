@@ -74,6 +74,7 @@ router.post("/loginModerador", (req, res) => {
 router.post("/login", (req, res) => {
     var username = req.body.username;
     var password = req.body.password;
+    console.log(username);
 
     /*
     Validación de los parametros

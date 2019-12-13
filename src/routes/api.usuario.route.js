@@ -23,11 +23,11 @@ router.get("/getAllusers", (req, res) => {
 /**
  * Obtener a un Usuario por su ID
  */
-router.get("/:id", (req, res) =>{
-    var jsonId = req.params.id;
-
-    Usuario.findById({
-        _id:jsonId}, 
+router.get("/:username", (req, res) =>{
+    //var jsonId = req.params.id;
+    var username = req.params.username;
+    Usuario.findOne({
+        username:username}, 
         function(err, docs){
         if(err){
             res.status(500).json({

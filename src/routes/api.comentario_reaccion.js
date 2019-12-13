@@ -24,11 +24,12 @@ router.post('/comment', (req, res)=>{
 
     let comentario = new Comentario({
         username: username,
-        fecha: fecha,
+        fecha: new Date().getTime().toString(),
         contenido: contenido
     })
 
-    Imagen.updateOne({_id : img_id}, {$push: { comentarios: comentario} }, (err, res) =>{
+    Imagen.updateOne({_id : img_id}, {$push: { comentarios: comentario} }, (err, msg) =>{
+
         if(err){
             res.status(500).json({
                 'message' : 'Hubo un erro al guardar el comentario',
@@ -41,7 +42,7 @@ router.post('/comment', (req, res)=>{
 
     res.status(200).json({
         'message' : 'Comentario guardado.',
-        'res': res.body,
+        'res': response.body,
     })
 })
 
@@ -52,6 +53,7 @@ router.post('/comment', (req, res)=>{
  router.post('/reaction', (req, res)=>{
      let username = req.body.username
      let img_id = req.body.img_id
+     
 
      if(!username || !img_id){
          res.status(400).json({
@@ -60,7 +62,9 @@ router.post('/comment', (req, res)=>{
          })
          return
      }
-     Imagen.updateOne({_id : img_id}, {$push: { reacciones: username} }, (err, res) =>{
+
+     Imagen.updateOne({_id : img_id}, {$push: { reacciones: username} }, (err, response) =>{
+
         if(err){
             res.status(500).json({
                 'message' : 'Hubo un erro al guardar la reacción.',
@@ -68,12 +72,11 @@ router.post('/comment', (req, res)=>{
             })
             return
         }
-        
     })
-
     res.status(200).json({
         'message' : 'Te gusta esto.',
         'res': res.body,
     })
+    
  }),
  module.exports = router

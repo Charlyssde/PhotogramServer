@@ -11,7 +11,7 @@ var ComentarioSchema = new Schema({
     fecha:{
         required: true,
         unique: true,
-        type: Date,
+        type: Number,
     },
     contenido:{
         required: true,

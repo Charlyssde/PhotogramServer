@@ -66,7 +66,7 @@ router.post('/img/new', upload.single('newImage'), async (req, res)=>{
      }
 
     var username = req.body.username;
-    let fecha = new Date();
+    let fecha = new Date().getTime().toString();
     //var path = req.body.path //Verificar dónde se genera el path
 
     /**
@@ -163,9 +163,6 @@ router.get('/img/getFeed', (req, res)=>{
 Hice cambios aquí Rodrigo
 */ 
 router.post('/img/prueba', upload.single('image'), (req, res, next)=>{
-    console.log(req.body.username)
-    console.log(req.body.image)
-
     /**
      * Validación de la existencia del archivo en la petición
      */
@@ -205,7 +202,6 @@ router.post('/img/prueba', upload.single('image'), (req, res, next)=>{
                 console.error(err)
                 return
             }
-            console.log(doc)
         })
     })
 
