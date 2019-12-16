@@ -6,7 +6,7 @@ from concurrent import futures
 import time
 import datetime
 
-cnx = mysql.connector.connect(user='root', password='2580',host='localhost',database='photogram')
+cnx = mysql.connector.connect(user='server_photogram', password='server',host='localhost',database='photogram')
 
 class ChatServer(str_grpc.ChatServicer):
     def __init__(self, *args, **kwargs):
