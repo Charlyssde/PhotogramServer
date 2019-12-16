@@ -23,14 +23,14 @@ class ChatServer(str_grpc.ChatServicer):
 
     def recibirMensajes(self, request, context):
         cont = 0
-        while True:
-            while cont < len(self.messages):
-                message = structure.Mensaje(
-                    id = self.messages[cont][0], sender = self.messages[cont][1], receiver = self.messages[cont][2], content = self.messages[cont][3])
-                if request.username == message.receiver:
-                    yield message
-                    print(cont)
-                cont = cont + 1
+        #while True:
+        while cont < len(self.messages):
+            message = structure.Mensaje(
+                id = self.messages[cont][0], sender = self.messages[cont][1], receiver = self.messages[cont][2], content = self.messages[cont][3])
+            if request.username == message.receiver or request.username == message.sender:
+                yield message
+                print(cont)
+            cont = cont + 1
     
     def enviarMensaje(self, request, context):
         cur = cnx.cursor()
